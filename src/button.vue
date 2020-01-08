@@ -16,16 +16,16 @@ export default {};
   padding: 0 1em;
   cursor: pointer;
 
-  &:active {
-    border-color: var(--borer-active-color);
-    color: var(--font-active-color);
-  }
-
-  &:focus {
+  &:focus, &:hover {
     background-color: var(--button-active-bg);
     color: var(--font-hover-color);
     border-color: var(--border-hover-color);
     outline: none;
+  }
+
+  &:active {
+    border-color: var(--borer-active-color);
+    color: var(--font-active-color);
   }
 }
 </style>
