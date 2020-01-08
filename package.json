@@ -1,0 +1,27 @@
+{
+  "name": "gulu",
+  "version": "0.0.1",
+  "description": "An UI Component For Vue.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adnabb/gulu.git"
+  },
+  "keywords": [
+    "vue",
+    "UI",
+    "Component"
+  ],
+  "author": "chen.shi.yu@qq.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adnabb/gulu/issues"
+  },
+  "homepage": "https://github.com/adnabb/gulu#readme",
+  "dependencies": {
+    "vue": "^2.6.11"
+  },
+}

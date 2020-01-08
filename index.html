@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gulu</title>
+</head>
+
+<style>
+    :root {
+        --border-color: #dcdfe6;
+        --border-hover-color: #c6e2ff;
+        --borer-active-color: #3a8ee6;
+        --border-radius: 4px;
+
+        --font-size: 14px;
+        --font-color: #333;
+        --font-hover-color: #409eff;
+        --font-active-color: #3a8ee6;
+        --font-disabled-color: #c0c4cc;
+
+        --button-height: 32px;
+        --button-bg: #fff;
+        --button-active-bg: #ecf5ff;
+    }
+
+    body,
+    div,
+    p {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: var(--font-color);
+        font-size: var(--font-size);
+    }
+
+    #app {
+        margin: 20px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <g-button></g-button>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.min.js"></script>
+<script src="./src/button.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+    })
+</script>
+
+<style>
+    .g-button {
+        background-color: var(--button-bg);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        height: var(--button-height);
+        line-height: 1;
+        padding: 0 1em;
+        cursor: pointer;
+    }
+
+    .g-button:active {
+        border-color: var(--borer-active-color);
+        color: var(--font-active-color);
+    }
+
+    .g-button:focus {
+        background-color: var(--button-active-bg);
+        color: var(--font-hover-color);
+        border-color: var(--border-hover-color);
+        outline: none;
+    }
+</style>
+
+</html>
