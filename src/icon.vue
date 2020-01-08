@@ -1,15 +1,25 @@
 <template>
-    <svg class="icon-gulu" aria-hidden="true">
-        <use xlink:href="#g-download">
+    <svg class="g-icon" aria-hidden="true">
+        <use :xlink:href="`#g-${icon}`">
     </svg>
 </template>
 
 <script>
     export default {
-        
+        props: {
+            icon: {
+                type: String,
+            }
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-
+.g-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
 </style>

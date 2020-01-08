@@ -1,13 +1,29 @@
 <template>
-  <button class="g-button">按钮</button>
+  <button class="g-button">
+    <g-icon :icon="icon" :class="`icon-position-${iconPosition}`"></g-icon>
+    <!-- <span class="button-text"> -->
+      <slot></slot>
+    <!-- </span> -->
+  </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props:{
+    icon: {
+      type: String,
+    },
+    iconPosition: {
+      default: 'left',
+      type: String,
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .g-button {
+  display: inline-flex;
   background-color: var(--button-bg);
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
@@ -26,6 +42,30 @@ export default {};
   &:active {
     border-color: var(--borer-active-color);
     color: var(--font-active-color);
+  }
+
+  .g-icon {
+    margin-right: .1em;
+  }
+
+  // .button-text {
+  //   display: inline-flex;
+  // }
+
+  .icon-position-left {
+    order: 1;
+
+    +.button-text {
+      order: 2;
+    }
+  }
+
+  .icon-position-right {
+    order: 2;
+
+    +.button-text {
+      order: 1;
+    }
   }
 }
 </style>
