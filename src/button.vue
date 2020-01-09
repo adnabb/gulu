@@ -1,9 +1,9 @@
 <template>
   <button class="g-button">
     <g-icon :icon="icon" :class="`icon-position-${iconPosition}`"></g-icon>
-    <!-- <span class="button-text"> -->
+    <span class="button-text">
       <slot></slot>
-    <!-- </span> -->
+    </span>
   </button>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   line-height: 1;
   padding: 0 1em;
   cursor: pointer;
+  vertical-align: middle;
 
   &:focus, &:hover {
     background-color: var(--button-active-bg);
@@ -44,16 +45,13 @@ export default {
     color: var(--font-active-color);
   }
 
-  .g-icon {
-    margin-right: .1em;
+  .button-text {
+    display: inline-flex;
   }
-
-  // .button-text {
-  //   display: inline-flex;
-  // }
 
   .icon-position-left {
     order: 1;
+    margin-right: .1em;
 
     +.button-text {
       order: 2;
@@ -62,6 +60,7 @@ export default {
 
   .icon-position-right {
     order: 2;
+    margin-left: .1em;
 
     +.button-text {
       order: 1;
