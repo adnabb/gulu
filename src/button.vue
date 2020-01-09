@@ -1,6 +1,7 @@
 <template>
   <button class="g-button" @click="$emit('click')">
-    <g-icon v-if="icon" :icon="icon" :class="`icon-position-${iconPosition}`"></g-icon>
+    <g-icon v-show="loading" icon="loading" class="g-loading" :class="`icon-position-${iconPosition}`"></g-icon>
+    <g-icon v-if="icon && !loading" :icon="icon" :class="`icon-position-${iconPosition}`"></g-icon>
     <span class="button-text">
       <slot></slot>
     </span>
@@ -9,16 +10,20 @@
 
 <script>
 export default {
-  props:{
+  props: {
     icon: {
-      type: String,
+      type: String
     },
     iconPosition: {
-      default: 'left',
+      default: "left",
       type: String,
       validator: function(value) {
-        return ['left', 'right'].indexOf(value.toLowerCase()) !== -1;
+        return ["left", "right"].indexOf(value.toLowerCase()) !== -1;
       }
+    },
+    loading: {
+      default: false,
+      type: Boolean,
     }
   }
 };
@@ -36,7 +41,8 @@ export default {
   cursor: pointer;
   vertical-align: middle;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     background-color: var(--button-active-bg);
     color: var(--font-hover-color);
     border-color: var(--border-hover-color);
@@ -48,24 +54,38 @@ export default {
     color: var(--font-active-color);
   }
 
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .g-loading {
+    animation: spin .5s infinite linear;
+  }
+
   .button-text {
     display: inline-flex;
   }
 
   .icon-position-left {
     order: 1;
-    margin-right: .1em;
+    margin-right: 0.1em;
 
-    +.button-text {
+    + .button-text {
       order: 2;
     }
   }
 
   .icon-position-right {
     order: 2;
-    margin-left: .1em;
+    margin-left: 0.1em;
 
-    +.button-text {
+    + .button-text {
       order: 1;
     }
   }

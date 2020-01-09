@@ -7,9 +7,12 @@ Vue.component('g-icon', Icon);
 
 new Vue({
   el: '#app',
-  methods: {
-    clickCallback() {
-      console.log('hi');
+  data() {
+    return {
+      loading1: false,
+      loading2: false,
+      loading3: false,
+      loading4: false,
     }
-  }
+  },
 });
