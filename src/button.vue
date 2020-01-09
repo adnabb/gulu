@@ -16,6 +16,9 @@ export default {
     iconPosition: {
       default: 'left',
       type: String,
+      validator: function(value) {
+        return ['left', 'right'].indexOf(value.toLowerCase()) !== -1;
+      }
     }
   }
 };
