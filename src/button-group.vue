@@ -5,7 +5,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted () {
+    for (const node of this.$el.children) {
+      const nodeName = node.nodeName.toLowerCase();
+
+      if (nodeName !== 'button') {
+        console.warn(`注意：<g-button-group>要求其内的子元素都必须为button，而你使用了错误的元素${nodeName}`)
+      }
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
