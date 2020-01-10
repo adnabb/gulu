@@ -1,8 +1,8 @@
 {
   "name": "vue-ui-framework",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An UI Component For Vue.js",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "parcel build test/* --no-minify && karma start --single-run",
     "dev-test": "parcel watch test/* --no-cache && karma start"
