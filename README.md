@@ -48,6 +48,13 @@ npx karma start
 
 将karma配置里的chrome改为ChromeHeadless
 
+5. npm publish
+
+![problem]([![1.png](https://www.imageoss.com/images/2020/01/10/1.png)](https://www.imageoss.com/image/4vI8b))
+
+npm publish时，必须将npm源切换为原始的，不可以为淘宝源。
+
+
 ## 学习和巩固
 
 1. html
