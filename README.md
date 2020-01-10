@@ -41,7 +41,12 @@ npx parcel index.html --no-cache
 npx parcel watch test/* --no-cache
 npx karma start
 ```
-然而实际这样运行之后，karma每次启动会有一些问题，所以推荐还是直接使用npm run test，每次编译之后再karma
+然而实际这样运行之后，karma每次启动会有一些问题，所以推荐还是直接使用npm run test，每次编译之后再karma（类似的问题解决方案可以查看一下，[solution](https://www.e-learn.cn/content/wangluowenzhang/171025)）
+
+
+4. travis ci 无法启动chrome
+
+将karma配置里的chrome改为ChromeHeadless
 
 ## 学习和巩固
 
