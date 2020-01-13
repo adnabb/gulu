@@ -1,25 +1,27 @@
 <template>
-    <svg class="g-icon" aria-hidden="true">
-        <use :xlink:href="`#g-${icon}`"></use>
-    </svg>
+  <svg class="g-icon" aria-hidden="true">
+    <use :xlink:href="`#g-${icon}`" />
+  </svg>
 </template>
 
 <script>
-    export default {
-        props: {
-            icon: {
-                type: String,
-            }
-        }
+import './static/icon'
+
+export default {
+  props: {
+    icon: {
+      type: String
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .g-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>
