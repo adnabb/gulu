@@ -1,71 +1,89 @@
 # gulu
 This is my own UI Component.
 
-## 坑
+[![Build Status](https://www.travis-ci.org/adnabb/gulu.svg?branch=master)](https://www.travis-ci.org/adnabb/gulu)
 
-1. 使用parcel打包时，遇到的坑
+## Getting Started
+Let's follow me, and then we can work with this UI components for Vuejs.
 
-（1）parcel 打包时需要入口文件
+### Installing
+
+1. 引入npm包
 ```
-npx parcel index.html
+npm install -D vue-ui-framework
 ```
-![p1.png](https://www.imageoss.com/images/2020/01/08/p1.png)
 
-（2）打包时会自动下载相应的内容
-![p2.png](https://www.imageoss.com/images/2020/01/08/p2.png)
+2. 引入所需的组件
+```js
+import { Button } from "vue-ui-framework";
 
-（3）打包一直报内部错误，需要清除parcel缓存
+export default {
+  name: "app",
+  components: {
+    "g-button": Button
+  }
+};
 ```
-npx parcel index.html --no-cache
-```
-![p3.png](https://www.imageoss.com/images/2020/01/08/p3.png)
 
-2. iconfont
-
-插入iconfont的symbol之后，必须加入通用的内容，否则icon不可以上色
-
+3. 引入样式
 ```css
-.g-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+<style>
+@import "../node_modules/vue-ui-framework/dist/index.css";
+
+:root {
+  --border-color: #dcdfe6;
+  --border-hover-color: #c6e2ff;
+  --borer-active-color: #3a8ee6;
+  --border-radius: 4px;
+
+  --font-size: 14px;
+  --font-color: #333;
+  --font-hover-color: #409eff;
+  --font-active-color: #3a8ee6;
+  --font-disabled-color: #c0c4cc;
+
+  --button-height: 32px;
+  --button-bg: #fff;
+  --button-active-bg: #ecf5ff;
 }
+</style>
 ```
 
-3. npm run dev-test 无法正常运行
+## Running the tests
 
-需要打开两个窗口进行手动运行
+1. 将代码克隆到本地
 ```
-npx parcel watch test/* --no-cache
-npx karma start
-```
-然而实际这样运行之后，karma每次启动会有一些问题，所以推荐还是直接使用npm run test，每次编译之后再karma（类似的问题解决方案可以查看一下，[solution](https://www.e-learn.cn/content/wangluowenzhang/171025)）
-
-
-4. travis ci 无法启动chrome
-
-将karma配置里的chrome改为ChromeHeadless
-
-5. npm publish
-
-![problem]([![1.png](https://www.imageoss.com/images/2020/01/10/1.png)](https://www.imageoss.com/image/4vI8b))
-
-npm publish时，必须将npm源切换为原始的，不可以为淘宝源。
-
-
-## 学习和巩固
-
-1. html
-
-html内的属性不可以为驼峰式
-
-2. karma
-
-使用以下命令，可以快速的创建一个有关karma的基础配置。
-```
-npx karma init karma.conf.js
+git clone https://github.com/adnabb/gulu.git
 ```
 
-在karma中引入了chai、sinon，在单元测试里面就可以直接使用，不需要单独引用；
+1. 安装相应的依赖
+```
+npm install
+```
+
+3. 执行npm命令
+```
+npm run test
+```
+
+## Built With
+
+Vue - This is a UI Component for Vuejs.
+
+
+## Versioning
+This is only an initial version, and I will do it completely then.
+
+## Authors
+
+[vivi](https://github.com/adnabb/gulu)
+
+## License
+
+[MIT](opensource.org/licenses/MIT)
+
+Copyright (c) 2020 vivi
+
+## Acknowledgments
+
+Thanks for my teacher to lead me and thank me.
