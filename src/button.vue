@@ -37,14 +37,10 @@ export default {
 <style lang="scss" scoped>
 .g-button {
   display: inline-flex;
-  background-color: var(--button-bg);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  height: var(--button-height);
-  line-height: 1;
-  padding: 0 1em;
-  cursor: pointer;
-  vertical-align: middle;
+  border: 1px solid var(--border-color); border-radius: var(--border-radius);
+  height: var(--button-height); line-height: 1;
+  padding: 0 1em; vertical-align: middle;
+  background-color: var(--button-bg); cursor: pointer;
 
   &:focus,
   &:hover {
@@ -55,44 +51,29 @@ export default {
   }
 
   &:active {
-    border-color: var(--borer-active-color);
-    color: var(--font-active-color);
+    border-color: var(--borer-active-color); color: var(--font-active-color);
   }
 
   @keyframes spin {
-    0% {
-      transform: rotate(0);
-    }
+    0% { transform: rotate(0); }
 
-    100% {
-      transform: rotate(360deg);
-    }
+    100% { transform: rotate(360deg); }
   }
 
-  .g-loading {
-    animation: spin .5s infinite linear;
-  }
-
-  .button-text {
-    display: inline-flex;
-  }
+  .g-loading { animation: spin .5s infinite linear; }
+  
+  .button-text { display: inline-flex; }
 
   .icon-position-left {
-    order: 1;
-    margin-right: 0.1em;
+    order: 1; margin-right: 0.1em;
 
-    + .button-text {
-      order: 2;
-    }
+    + .button-text { order: 2; }
   }
 
   .icon-position-right {
-    order: 2;
-    margin-left: 0.1em;
+    order: 2; margin-left: 0.1em;
 
-    + .button-text {
-      order: 1;
-    }
+    + .button-text { order: 1; }
   }
 }
 </style>
