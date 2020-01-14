@@ -35,23 +35,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'styles/variables.scss';
+
 .g-button {
   display: inline-flex;
-  border: 1px solid var(--border-color); border-radius: var(--border-radius);
-  height: var(--button-height); line-height: 1;
+  border: 1px solid $border-color; border-radius: $border-radius;
+  height: $common-height; line-height: 1;
   padding: 0 1em; vertical-align: middle;
-  background-color: var(--button-bg); cursor: pointer;
+  background-color: $button-bg; cursor: pointer;
 
   &:focus,
   &:hover {
-    background-color: var(--button-active-bg);
-    color: var(--font-hover-color);
-    border-color: var(--border-hover-color);
+    background-color: $button-active-bg;
+    color: $font-hover-color;
+    border-color: $border-hover-color;
     outline: none;
   }
 
   &:active {
-    border-color: var(--borer-active-color); color: var(--font-active-color);
+    border-color: $borer-active-color; color: $font-active-color;
   }
 
   @keyframes spin {
