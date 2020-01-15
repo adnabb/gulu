@@ -19,6 +19,12 @@ new Vue({
       loading2: false,
       loading3: false,
       loading4: false,
-    }
+      value: '',
+    };
+  },
+  methods: {
+    changeValue(value) {
+      this.value = value;
+    },
   },
 });
