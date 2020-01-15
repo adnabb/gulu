@@ -8,6 +8,10 @@
       :disabled="disabled"
       :readonly="readonly"
       :error="error"
+      @change="$emit('change', $event.target.value)"
+      @input="$emit('input', $event.target.value)"
+      @blur="$emit('blur', $event.target.value)"
+      @focus="$emit('focus', $event.target.value)"
     />
     <template v-if="error">
       <g-icon class="error-tips" icon="info"></g-icon>
@@ -23,7 +27,8 @@ export default {
   name: "GInput",
   props: {
     value: {
-      type: String
+      type: String,
+      default: '',
     },
     placeholder: {
       type: String
@@ -54,7 +59,6 @@ $input-hover-color: #c0c4cc;
 $input-font-color: #606266;
 
 $input-disabled-bg: #f5f7fa;
-
 
 .container {
   display: inline-block;
