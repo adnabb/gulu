@@ -51,6 +51,18 @@ npx karma start
 
 npm publish时，必须将npm源切换为原始的，不可以为淘宝源。
 
+6. vue :style
+
+这样写是不被允许以及不被生效的，只能写单个的某一方向的属性
+```html
+:style="{margin: 0 gutter + 'px'}"
+```
+
+例如
+```html
+:style="{marginRight: gutter + 'px'}"
+```
+
 
 ## 学习和巩固
 

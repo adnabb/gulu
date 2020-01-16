@@ -41,8 +41,128 @@ p, input {
 }
 </style>
 
+<style>
+.g-row {
+    border-radius: 4px;
+}
+
+.g-col {
+    border-radius: 4px;
+    height: 25px;
+    width: 50%;
+    margin-bottom: 10px
+}
+
+.g-col:nth-child(even) {
+    background-color: #e5e9f2;
+}
+
+.g-col:nth-child(odd) {
+    background-color: #d3dce6;
+}
+</style>
+
 <body>
     <div id="app">
+        <div style="margin: 20px 0;">
+            <g-row>
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+            <g-row>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+            <g-row>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <g-row :gutter="10">
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+            <g-row :gutter="20">
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+            <g-row :gutter="30">
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+                <g-col></g-col>
+            </g-row>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <g-row>
+                <g-col span="13"></g-col>
+                <g-col span="11"></g-col>
+            </g-row>
+            <g-row>
+                <g-col span="8"></g-col>
+                <g-col span="8"></g-col>
+                <g-col span="8"></g-col>
+            </g-row>
+            <g-row>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+            </g-row>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <g-row>
+                <g-col span="13" offset="1"></g-col>
+                <g-col span="10"></g-col>
+            </g-row>
+            <g-row>
+                <g-col span="8" offset="8"></g-col>
+                <g-col span="8"></g-col>
+            </g-row>
+            <g-row>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4" offset="4"></g-col>
+                <g-col span="4"></g-col>
+            </g-row>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <g-row align="center">
+                <g-col span="10" offset="1"></g-col>
+                <g-col span="10"></g-col>
+            </g-row>
+            <g-row align="left">
+                <g-col span="7" offset="8"></g-col>
+                <g-col span="8"></g-col>
+            </g-row>
+            <g-row align="right">
+                <g-col span="4"></g-col>
+                <g-col span="4"></g-col>
+                <g-col span="4" offset="4"></g-col>
+                <g-col span="4"></g-col>
+            </g-row>
+        </div>
+
         <g-input></g-input>
         <g-input placeholder="请输入内容"></g-input>
         <g-input disabled value="123"></g-input>
