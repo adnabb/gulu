@@ -1,15 +1,12 @@
 <template>
-  <div
-    :class="['g-col', span && `col-span-${span}`, offset && `col-offset-${offset}`]"
-    :style="{marginLeft: gutter/2 + 'px', marginRight: gutter/2 + 'px'}"
-  >
+  <div :class="colClass" :style="colStyle">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GuluCol",
+  name: 'GuluCol',
   props: {
     span: {
       type: [Number, String]
@@ -21,6 +18,20 @@ export default {
   computed: {
     gutter() {
       return this.$parent.gutter;
+    },
+    colClass() {
+      const { span, offset } = this;
+
+      return [
+        'g-col',
+        span && `col-span-${span}`,
+        offset && `col-offset-${offset}`
+      ];
+    },
+    colStyle() {
+      const { gutter } = this;
+
+      return { marginLeft: gutter / 2 + 'px', marginRight: gutter / 2 + 'px' };
     }
   },
   data() {
