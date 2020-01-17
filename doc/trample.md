@@ -63,6 +63,12 @@ npm publish时，必须将npm源切换为原始的，不可以为淘宝源。
 :style="{marginRight: gutter + 'px'}"
 ```
 
+7. row.test.js
+
+在写测试用例测试样式的时候 `window.getComputedStyle(row).marginLeft`样式无法获取，而`row.style.marginLeft`却可以。
+
+猜测：使用vue推荐的单元测试的写法，mount时，并没有真正的在页面内渲染，所以获取不到具体的值。
+
 
 ## 学习和巩固
 
