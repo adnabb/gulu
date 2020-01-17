@@ -51,22 +51,17 @@ export default {
       return this.$parent.gutter;
     },
     colClass() {
-      const { span, offset, phone, ipad, narrowPc, pc, widePc } = this;
+      const { span, offset, phone, ipad, narrowPc, pc, widePc, createClasses } = this;
 
       return [
         "g-col",
         span && `col-span-${span}`,
         offset && `col-offset-${offset}`,
-        phone && (phone.span || phone.span == 0) && `col-phone-span-${phone.span}`,
-        phone && (phone.offset || phone.offset == 0) && `col-phone-offset-${phone.offset}`,
-        ipad && (ipad.span || ipad.span == 0) && `col-ipad-span-${ipad.span}`,
-        ipad && (ipad.offset || ipad.offset == 0) && `col-ipad-offset-${ipad.offset}`,
-        narrowPc && (narrowPc.span || narrowPc.span == 0) && `col-narrow-pc-span-${narrowPc.span}`,
-        narrowPc && (narrowPc.offset || narrowPc.offset == 0) && `col-narrow-pc-offset-${narrowPc.offset}`,
-        pc && (pc.span || pc.span == 0) && `col-pc-span-${pc.span}`,
-        pc && (pc.offset || pc.offset == 0) && `col-pc-offset-${pc.offset}`,
-        widePc && (widePc.span || widePc.span == 0) && `col-wide-pc-span-${widePc.span}`,
-        widePc && (widePc.offset || widePc.offset == 0) && `col-wide-pc-offset-${widePc.offset}`
+        ...createClasses(phone, 'phone'),
+        ...createClasses(ipad, 'ipad'),
+        ...createClasses(narrowPc, 'narrowPc'),
+        ...createClasses(pc, 'pc'),
+        ...createClasses(widePc, 'widePc'),
       ];
     },
     colStyle() {
@@ -77,7 +72,12 @@ export default {
   },
   data() {
     return {};
-  }
+  },
+  methods: {
+    createClasses(obj, str = '') {
+      return obj ? [`col-${str}-span-${obj.span}`, `col-${str}-offset-${obj.offset}`] : [];
+    },
+  },
 };
 </script>
 
