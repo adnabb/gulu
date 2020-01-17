@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import { mount } from '@vue/test-utils';
-import Row from '../src/row';
 import Col from '../src/col';
 
 const expect = chai.expect;
