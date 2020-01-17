@@ -6,7 +6,14 @@
 
 <script>
 const validator = obj => {
-  return obj && (obj.hasOwnProperty("span") || obj.hasOwnProperty("offset"));
+
+  if (obj) {
+    if (!obj.hasOwnProperty('span')) obj.span = 0;
+
+    if (!obj.hasOwnProperty('offset')) obj.offset = 0;
+  }
+
+  return obj;
 };
 
 export default {
