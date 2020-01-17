@@ -9,61 +9,130 @@
 </head>
 
 <style>
-:root {
-  --border-color: #dcdfe6;
-  --border-hover-color: #c6e2ff;
-  --borer-active-color: #3a8ee6;
-  --border-radius: 4px;
+    :root {
+        --border-color: #dcdfe6;
+        --border-hover-color: #c6e2ff;
+        --borer-active-color: #3a8ee6;
+        --border-radius: 4px;
 
-  --font-size: 14px;
-  --font-color: #333;
-  --font-hover-color: #409eff;
-  --font-active-color: #3a8ee6;
-  --font-disabled-color: #c0c4cc;
+        --font-size: 14px;
+        --font-color: #333;
+        --font-hover-color: #409eff;
+        --font-active-color: #3a8ee6;
+        --font-disabled-color: #c0c4cc;
 
-  --common-height: 32px;
-  --button-bg: #fff;
-  --button-active-bg: #ecf5ff;
-}
+        --common-height: 32px;
+        --button-bg: #fff;
+        --button-active-bg: #ecf5ff;
+    }
 
-body,
-div,
-p, input {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    color: var(--font-color);
-    font-size: var(--font-size);
-}
+    body,
+    div,
+    p,
+    input {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: var(--font-color);
+        font-size: var(--font-size);
+    }
 
-#app {
-    margin: 20px;
-}
+    #app {
+        margin: 20px;
+    }
 </style>
 
 <style>
-.g-row {
-    border-radius: 4px;
-}
+    .g-row {
+        border-radius: 4px;
+    }
 
-.g-col {
-    border-radius: 4px;
-    height: 25px;
-    width: 50%;
-    margin-bottom: 10px
-}
+    .g-col {
+        border-radius: 4px;
+        height: 25px;
+        width: 50%;
+        margin-bottom: 10px
+    }
 
-.g-col:nth-child(even) {
-    background-color: #e5e9f2;
-}
+    .g-col:nth-child(even) {
+        background-color: #e5e9f2;
+    }
 
-.g-col:nth-child(odd) {
-    background-color: #d3dce6;
-}
+    .g-col:nth-child(odd) {
+        background-color: #d3dce6;
+    }
+</style>
+
+<style>
+    .g-layout {
+        text-align: center;
+    }
+
+    .g-content {
+        background: rgba(16, 142, 233, 1);
+        color: #fff;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .g-header,
+    .g-footer {
+        background: #7dbcea;
+        color: #fff;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .g-sider {
+        background: #3ba0e9;
+        color: #fff;
+        line-height: 100px;
+    }
 </style>
 
 <body>
     <div id="app">
+        基础结构
+        <div style="margin: 20px 0;">
+            <g-layout>
+                <g-header>Header</g-header>
+                <g-content>Content</g-content>
+                <g-footer>Footer</g-footer>
+            </g-layout>
+        </div>
+        Sider在中间（左）
+        <div style="margin: 20px 0;">
+            <g-layout>
+                <g-header>Header</g-header>
+                <g-layout>
+                    <g-sider>Sider</g-sider>
+                    <g-content>Content</g-content>
+                </g-layout>
+                <g-footer>Footer</g-footer>
+            </g-layout>
+        </div>
+        Sider在中间（右）
+        <div style="margin: 20px 0;">
+            <g-layout>
+                <g-header>Header</g-header>
+                <g-layout>
+                    <g-content>Content</g-content>
+                    <g-sider>Sider</g-sider>
+                </g-layout>
+                <g-footer>Footer</g-footer>
+            </g-layout>
+        </div>
+        Sider在左侧
+        <div style="margin: 20px 0;">
+            <g-layout>
+                <g-sider style="line-height: 200px;">Sider</g-sider>
+                <g-layout>
+                    <g-header>Header</g-header>
+                    <g-content>Content</g-content>
+                    <g-footer>Footer</g-footer>
+                </g-layout>
+            </g-layout>
+        </div>
         基础用法
         <div style="margin: 20px 0;">
             <g-row>
@@ -149,8 +218,10 @@ p, input {
         响应式
         <div style="margin: 20px 0;">
             <g-row>
-                <g-col span="1" offset="1" :phone="{span:7}" :ipad="{span:12}" :narrow-pc="{span:14}" :pc="{span:20}" :wide-pc="{span:23}"></g-col>
-                <g-col span="22" :phone="{span:17}" :ipad="{span:12}" :narrow-pc="{span:10}" :pc="{span:4}" :wide-pc="{span:1}"></g-col>
+                <g-col span="1" offset="1" :phone="{span:7}" :ipad="{span:12}" :narrow-pc="{span:14}" :pc="{span:20}"
+                    :wide-pc="{span:23}"></g-col>
+                <g-col span="22" :phone="{span:17}" :ipad="{span:12}" :narrow-pc="{span:10}" :pc="{span:4}"
+                    :wide-pc="{span:1}"></g-col>
             </g-row>
             <g-row>
                 <g-col span="8" :phone="{span:8}" :ipad="{span:8}"></g-col>
@@ -189,7 +260,8 @@ p, input {
             <g-button>更多</g-button>
             <g-button icon="arrow-right" icon-position="right">下一页</g-button>
         </g-button-group>
-    </div></div>
+    </div>
+    </div>
 
 </body>
 <script src="./src/app.js"></script>
