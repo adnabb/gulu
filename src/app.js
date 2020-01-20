@@ -10,6 +10,10 @@ import Header from './header';
 import Sider from './sider';
 import Content from './content';
 import Footer from './footer';
+import Toast from './toast';
+import MyPlugin from './my-plugins';
+
+Vue.use(MyPlugin);
 
 Vue.component('g-button', Button);
 Vue.component('g-icon', Icon);
@@ -26,6 +30,7 @@ new Vue({
     'g-sider': Sider,
     'g-content': Content,
     'g-footer': Footer,
+    'g-toast': Toast,
   },
   data() {
     return {
@@ -39,6 +44,14 @@ new Vue({
   methods: {
     changeValue(value) {
       this.value = value;
+    },
+    showToast() {
+      this.$toast({
+        position: 'top',
+        text: `${Math.random() * 100}tt`,
+        autoClose: false,
+        customCloseText: '关闭'
+      });
     },
   },
 });
