@@ -66,5 +66,16 @@ new Vue({
         htmlSuport: true,
       })
     },
+    multiLineToast() {
+      this.$toast({
+        text:`我是很长的文字，我来测试多行的toast的排版、样式等是否合理。
+        我是很长的文字，我来测试多行的toast的排版、样式等是否合理
+        我是很长的文字，我来测试多行的toast的排版、样式等是否合理
+        我是很长的文字，我来测试多行的toast的排版、样式等是否合理
+        我是很长的文字，我来测试多行的toast的排版、样式等是否合理`,
+        customCloseText: '关闭',
+        autoClose: false,
+      })
+    },
   },
 });

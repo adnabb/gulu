@@ -35,6 +35,7 @@ export default {
 @import './styles/variables';
 
 .g-toast {
+  display: flex;
   position: absolute;
   box-shadow: $box-shadow; background-color: #fff;
   padding: 0 $toast-padding-width 0 $toast-padding-width;
@@ -47,6 +48,9 @@ export default {
     margin-left: $toast-padding-width;
     border-left: 1px solid $border-color;
     cursor: pointer;
+    min-width: 2em;
+    display: flex;
+    align-items: center;
   }
 
   &.g-toast-top { top: 2%; left: 50%; transform: translateX(-50%); }
