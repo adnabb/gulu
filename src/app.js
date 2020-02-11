@@ -53,5 +53,18 @@ new Vue({
         customCloseText: '关闭'
       });
     },
+    autoCloseToast() {
+      this.$toast({
+        autoClose: true,
+        text: '内容3秒后自动关闭',
+        duration: 3,
+      })
+    },
+    htmlSuportedToast() {
+      this.$toast({
+        text:'<i>Nice to meet you</i>',
+        htmlSuport: true,
+      })
+    },
   },
 });

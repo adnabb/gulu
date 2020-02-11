@@ -9,17 +9,20 @@ MyPlugin.install = function (Vue, options) {
 
     if (curentToast) { closeToast(curentToast) }
     
-    const div = document.createElement('div');
-    document.body.append(div);
+    const toastWraper = document.createElement('div');
+    const toastDiv = document.createElement('div');
+
+    toastWraper.append(toastDiv);
+    document.body.append(toastWraper);
     
     const Constructor = Vue.extend(Toast);
     const vm = new Constructor({ propsData: toastOptions });
     vm.$slots.default = toastOptions.text;
     vm.closeToast = closeToast;
-    vm.$mount(div);
+    vm.$mount(toastDiv);
     curentToast = vm;
 
-    if (vm.autoClose) { setTimeout(() => { destroy(vm) }, vm.duration * 1000); }
+    if (vm.autoClose) { setTimeout(() => { closeToast(vm) }, vm.duration * 1000); }
 
     function closeToast(vm) { vm.$el.remove(); vm.$destroy(); curentToast = null; }
   }
