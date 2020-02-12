@@ -21,11 +21,23 @@ export default {
     },
     customCloseText: { type: String },
     text: { type: String },
-    htmlSuport: { type: Boolean, default: false }
+    htmlSuport: { type: Boolean, default: false },
+  },
+  mounted() {
+    this.execAutoClose();
   },
   methods: {
     close() {
-      this.closeToast(this);
+      this.$emit('close');
+      this.$el.remove();
+      this.$destroy();
+    },
+    execAutoClose() {
+      if (this.autoClose) {
+        setTimeout(() => {
+          this.close();
+        }, this.duration * 1000);
+      }
     }
   }
 };

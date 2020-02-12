@@ -5,27 +5,40 @@ let MyPlugin = {};
 MyPlugin.install = function (Vue, options) {
   let curentToast;
 
-  Vue.prototype.$toast = function (toastOptions) {
+  Vue.prototype.$toast = function (text, toastOptions = {}) {
 
-    if (curentToast) { closeToast(curentToast) }
-    
-    const toastWraper = document.createElement('div');
-    const toastDiv = document.createElement('div');
+    if (curentToast) { curentToast.close() }
 
-    toastWraper.append(toastDiv);
-    document.body.append(toastWraper);
-    
-    const Constructor = Vue.extend(Toast);
-    const vm = new Constructor({ propsData: toastOptions });
-    vm.$slots.default = toastOptions.text;
-    vm.closeToast = closeToast;
-    vm.$mount(toastDiv);
-    curentToast = vm;
+    if (typeof text === 'string') {
+      toastOptions = { ...toastOptions, text }
+    } else if (typeof text === 'object') {
+      toastOptions = { ...toastOptions, ...text }
+    }
 
-    if (vm.autoClose) { setTimeout(() => { closeToast(vm) }, vm.duration * 1000); }
-
-    function closeToast(vm) { vm.$el.remove(); vm.$destroy(); curentToast = null; }
+    curentToast = createToast({
+      Vue, propsData: toastOptions, onClose: function () {
+        curentToast = null;
+      }
+    });
   }
+}
+
+function createToast({ Vue, propsData, onClose }) {
+  const toastWraper = document.createElement('div');
+  const toastDiv = document.createElement('div');
+
+  toastWraper.append(toastDiv);
+
+  const Constructor = Vue.extend(Toast);
+  const vm = new Constructor({ propsData });
+  vm.$slots.default = propsData.text;
+  vm.$mount(toastDiv);
+
+  vm.$on('close', onClose)
+
+  document.body.append(toastWraper);
+
+  return vm;
 }
 
 export default MyPlugin;

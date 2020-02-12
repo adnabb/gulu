@@ -46,6 +46,11 @@ new Vue({
       this.value = value;
     },
     showToast() {
+      this.$toast('你好，这是一条toast内容', {
+        autoClose: false
+      });
+    },
+    customCloseToast() {
       this.$toast({
         position: 'top',
         text: `${Math.random() * 100}tt`,
