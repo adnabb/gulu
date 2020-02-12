@@ -50,6 +50,12 @@ new Vue({
         autoClose: false
       });
     },
+    changeToastPosition() {
+      this.$toast('这是页面下方的toast', {
+        autoClose: false,
+        position: 'bottom'
+      });
+    },
     customCloseToast() {
       this.$toast({
         position: 'top',

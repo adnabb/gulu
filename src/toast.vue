@@ -1,5 +1,8 @@
 <template>
-  <div class="g-toast" :class="[`g-toast-${position}`]">
+  <div
+    class="g-toast"
+    :class="[`g-toast-${position}`, show ? 'g-toast-fade-in' : 'g-toast-fade-out']"
+  >
     <span v-if="htmlSuport" class="g-toast-text" v-html="text"></span>
     <span v-else class="g-toast-text">
       <slot></slot>
@@ -21,16 +24,20 @@ export default {
     },
     customCloseText: { type: String },
     text: { type: String },
-    htmlSuport: { type: Boolean, default: false },
+    htmlSuport: { type: Boolean, default: false }
+  },
+  data() {
+    return {
+      show: true
+    };
   },
   mounted() {
     this.execAutoClose();
   },
   methods: {
     close() {
-      this.$emit('close');
-      this.$el.remove();
-      this.$destroy();
+      this.show = false;
+      this.$emit("close");
     },
     execAutoClose() {
       if (this.autoClose) {
@@ -39,7 +46,7 @@ export default {
         }, this.duration * 1000);
       }
     }
-  }
+  },
 };
 </script>
 
@@ -53,6 +60,7 @@ export default {
   padding: 0 $toast-padding-width 0 $toast-padding-width;
   border-radius: $border-radius;
 
+
   .g-toast-text, .custom-close { display: inline-block; padding: $toast-padding-height 0; }
     
   .custom-close {
@@ -65,10 +73,38 @@ export default {
     align-items: center;
   }
 
+  &.g-toast-fade-out { animation: fade-out 1s; }
+
+  &.g-toast-fade-in { animation: fade-in 1s; }
+
   &.g-toast-top { top: 2%; left: 50%; transform: translateX(-50%); }
 
   &.g-toast-bottom { bottom: 2%; left: 50%; transform: translateX(-50%); }
 
   &.g-toast-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0F);
+    }
+  }
+
+  @keyframes fade-out {
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -100%);
+    }
+
+    0% {
+      opacity: 1;
+      transform: translate(-50%, 0F);
+    }
+  }
 }
 </style>
