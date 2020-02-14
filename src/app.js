@@ -67,8 +67,8 @@ new Vue({
     autoCloseToast() {
       this.$toast({
         autoClose: true,
-        text: '内容3秒后自动关闭',
-        duration: 3,
+        text: '内容1秒后自动关闭',
+        duration: 1,
       })
     },
     htmlSuportedToast() {

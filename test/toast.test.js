@@ -11,7 +11,7 @@ describe('Toast', () => {
 
   describe('props', () => {
 
-    it('接收autoClose和duration属性', function(done){
+    it('接收autoClose和duration属性', function (done) {
       const wrapper = mount(Toast, {
         propsData: {
           autoClose: true,
@@ -22,10 +22,10 @@ describe('Toast', () => {
       const { vm } = wrapper;
       let toast = vm.$el;
 
-      vm.$on('close', () => {
-        expect(document.body.contains(vm.$el)).to.eq(false);
+      setTimeout(() => {
+        expect(document.body.contains(toast)).to.eq(false);
         done();
-      })
+      }, 1000)
 
     });
 

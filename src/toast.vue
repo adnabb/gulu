@@ -37,7 +37,13 @@ export default {
   methods: {
     close() {
       this.show = false;
-      this.$emit("close");
+      const { animationDuration } = getComputedStyle(this.$el);
+      const setTimeoutTime = animationDuration.slice(0, -1) * 1000;
+
+      setTimeout(() => {
+        this.$destroy();
+        this.$el.remove();
+      }, setTimeoutTime);
     },
     execAutoClose() {
       if (this.autoClose) {
@@ -46,7 +52,7 @@ export default {
         }, this.duration * 1000);
       }
     }
-  },
+  }
 };
 </script>
 
@@ -73,9 +79,9 @@ export default {
     align-items: center;
   }
 
-  &.g-toast-fade-out { animation: fade-out 1s; }
+  &.g-toast-fade-out { animation: fade-out 600ms; }
 
-  &.g-toast-fade-in { animation: fade-in 1s; }
+  &.g-toast-fade-in { animation: fade-in 600ms; }
 
   &.g-toast-top { top: 2%; left: 50%; transform: translateX(-50%); }
 
@@ -91,7 +97,7 @@ export default {
 
     100% {
       opacity: 1;
-      transform: translate(-50%, 0F);
+      transform: translate(-50%, 0);
     }
   }
 
@@ -103,7 +109,7 @@ export default {
 
     0% {
       opacity: 1;
-      transform: translate(-50%, 0F);
+      transform: translate(-50%, 0);
     }
   }
 }
