@@ -84,3 +84,30 @@ npx karma init karma.conf.js
 ```
 
 在karma中引入了chai、sinon，在单元测试里面就可以直接使用，不需要单独引用；
+
+3. mocha异步测试用例超过限定的两秒的设置
+```js
+describe('Test timeout', function() {
+	it('It exceed 2000ms time , and will fail', function(done) {// 异步测试，要用 done
+		var callback = function() {
+	  		console.log("------");
+	  		done();
+	  	}
+	    setTimeout(callback, 3000);// 延迟 3000ms 执行，让其超时。该测试用例会失败。
+	    
+	});
+	it('It exceed 2000ms time , but will pass', function(done) {
+		this.timeout(5000);
+		var callback = function() {
+	  		console.log("------");
+	  		done();
+	  	}
+	    setTimeout(callback, 3000);// 延迟 3000ms 执行，但是设置timeout 为 5000ms，因此该用例会成功。
+	    
+	});
+ 
+
+————————————————
+版权声明：本文为CSDN博主「hustzw07」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/hustzw07/article/details/73468970
+···
