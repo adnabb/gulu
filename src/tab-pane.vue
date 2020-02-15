@@ -5,31 +5,30 @@
 </template>
 
 <script>
-import { EventBus } from './event-bus';
-
-  export default {
-    name: 'GuluTabPane',
-    props: {
-      tab: {
-        type: String,
-        required: true
-      },
-      id: {
-        type: [String, Number],
-        required: true
-      },
+export default {
+  name: "GuluTabPane",
+  props: {
+    tab: {
+      type: String,
+      required: true
     },
-    data() {
-      return {
-        activeId: ''
-      }
-    },
-    mounted () {
-      EventBus.$on('getActiveTabId', (activeTabId) => {
-        this.activeId = activeTabId;        
-      });
-    },
+    id: {
+      type: [String, Number],
+      required: true
+    }
+  },
+  inject: ['eventBus'],
+  data() {
+    return {
+      activeId: ''
+    };
+  },
+  mounted() {
+    this.eventBus.$on('getActiveTabId', activeTabId => {
+      this.activeId = activeTabId;
+    });
   }
+};
 </script>
 
 <style lang="scss" scoped>

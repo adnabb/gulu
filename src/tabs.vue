@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import { EventBus } from "./event-bus";
+import Vue from 'vue';
+
 export default {
   name: "GuluTabs",
   props: {
@@ -27,9 +28,15 @@ export default {
   },
   data() {
     return {
+      eventBus: new Vue(),
       tabs: [],
-      selectedId: ''
+      selectedId: '',
     };
+  },
+  provide() {
+    return {
+      eventBus: this.eventBus
+    }
   },
   mounted() {
     this.init();
@@ -52,7 +59,7 @@ export default {
     },
     updateSelectedId(id) {
       this.selectedId = id;
-      EventBus.$emit("getActiveTabId", this.selectedId);
+      this.eventBus.$emit("getActiveTabId", this.selectedId);
       this.changeActiveLineStyle();
     },
     changeActiveLineStyle() {
