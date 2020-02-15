@@ -37,13 +37,10 @@ export default {
   methods: {
     close() {
       this.show = false;
-      const { animationDuration } = getComputedStyle(this.$el);
-      const setTimeoutTime = animationDuration.slice(0, -1) * 1000;
-
-      setTimeout(() => {
+      this.$el.addEventListener("animationend", () => {
         this.$destroy();
         this.$el.remove();
-      }, setTimeoutTime);
+      });
     },
     execAutoClose() {
       if (this.autoClose) {
