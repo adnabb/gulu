@@ -12,6 +12,8 @@ import Content from './content';
 import Footer from './footer';
 import Toast from './toast';
 import MyPlugin from './my-plugins';
+import Tabs from './tabs';
+import TabPane from './tab-pane';
 
 Vue.use(MyPlugin);
 
@@ -31,6 +33,8 @@ new Vue({
     'g-content': Content,
     'g-footer': Footer,
     'g-toast': Toast,
+    'g-tabs': Tabs,
+    'g-tab-pane': TabPane,
   },
   data() {
     return {
