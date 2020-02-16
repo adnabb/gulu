@@ -1,6 +1,9 @@
 <template>
   <div class="g-tabs-pane" v-show="activeId === id">
     <slot></slot>
+    <div class="disapper">
+      <slot name="tab"></slot>
+    </div>
   </div>
 </template>
 
@@ -13,18 +16,21 @@ export default {
       required: true
     },
     id: {
-      type: [String, Number],
+      type: String | Number,
       required: true
+    },
+    disabled: {
+      type: Boolean
     }
   },
-  inject: ['eventBus'],
+  inject: ["eventBus"],
   data() {
     return {
-      activeId: ''
+      activeId: ""
     };
   },
   mounted() {
-    this.eventBus.$on('getActiveTabId', activeTabId => {
+    this.eventBus.$on("getActiveTabId", activeTabId => {
       this.activeId = activeTabId;
     });
   }
@@ -32,7 +38,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.g-tab-pane {
+@import 'styles/variables.scss';
 
+.g-tabs-pane {
+  .disapper {
+    display: none;
+  }
 }
 </style>

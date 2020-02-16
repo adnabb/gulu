@@ -43,9 +43,13 @@ new Vue({
       loading3: false,
       loading4: false,
       value: '',
+      tabPosition: 'top'
     };
   },
   methods: {
+    changeTopPosition(position) {
+      this.tabPosition = position;
+    },
     changeValue(value) {
       this.value = value;
     },

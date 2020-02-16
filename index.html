@@ -92,8 +92,50 @@
 
 <body>
     <div id="app">
+        可以改变位置的tab
         <div style="margin: 20px 0">
-            <g-tabs defaultActiveId="1" onChange="changeTab">
+            <g-button-group style="margin-bottom:20px">
+                <g-button @click="changeTopPosition('top')">top</g-button>
+                <g-button @click="changeTopPosition('right')">right</g-button>
+                <g-button @click="changeTopPosition('bottom')">bottom</g-button>
+                <g-button @click="changeTopPosition('left')">left</g-button>
+            </g-button-group>
+            <g-tabs :tab-position="tabPosition">
+                <g-tab-pane tab="tab1" id="1">pane1</g-tab-pane>
+                <g-tab-pane tab="tab2" id="2">pane2</g-tab-pane>
+                <g-tab-pane tab="tab3" id="3">pane3</g-tab-pane>
+            </g-tabs>
+        </div>
+        有icon的tab
+        <div style="margin: 20px 0">
+            <g-tabs default-active-id="1">
+                <g-tab-pane tab="tab1" id="1">
+                    <span slot="tab">
+                        <g-icon icon="download"></g-icon>
+                        下载
+                    </span>
+                    下载pane
+                </g-tab-pane>
+                <g-tab-pane tab="tab2" id="2">
+                    <span slot="tab">
+                        <g-icon icon="upload"></g-icon>
+                        上传
+                    </span>
+                    上传pane
+                </g-tab-pane>
+            </g-tabs>
+        </div>
+        禁用tab
+        <div style="margin: 20px 0">
+            <g-tabs default-active-id="1">
+                <g-tab-pane tab="tab1" id="1">pane1</g-tab-pane>
+                <g-tab-pane tab="tab2" :disabled="true" id="2">pane2</g-tab-pane>
+                <g-tab-pane tab="tab3" id="3">pane3</g-tab-pane>
+            </g-tabs>
+        </div>
+        默认选中第一项
+        <div style="margin: 20px 0">
+            <g-tabs default-active-id="1">
                 <g-tab-pane tab="tab1" id="1">pane1</g-tab-pane>
                 <g-tab-pane tab="tab2" id="2">pane2</g-tab-pane>
                 <g-tab-pane tab="tab3" id="3">pane3</g-tab-pane>
