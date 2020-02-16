@@ -53,7 +53,7 @@ export default {
   }
 
   &:active {
-    border-color: $borer-active-color; color: $font-active-color;
+    border-color: $border-active-color; color: $font-active-color;
   }
 
   @keyframes spin {
