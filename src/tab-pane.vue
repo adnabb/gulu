@@ -1,5 +1,5 @@
 <template>
-  <div class="g-tabs-pane" v-show="activeId === id">
+  <div class="g-tabs-pane" :class="{disapper: disabled}" v-show="activeId === id">
     <slot></slot>
     <div class="disapper">
       <slot name="tab"></slot>
@@ -40,9 +40,7 @@ export default {
 <style lang="scss" scoped>
 @import 'styles/variables.scss';
 
-.g-tabs-pane {
-  .disapper {
-    display: none;
-  }
+.disapper {
+  display: none;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="g-tabs" :class="[`tab-position-${tabPosition}`]">
-    <div class="g-tabs-nav-wraper">
+    <div class="g-tabs-nav-wraper" ref="tabNavWrapper">
       <div
         class="g-tabs-nav"
         :class="{active: selectedId === item.id, disabled: item.disabled}"
@@ -55,7 +55,8 @@ export default {
       this.setDefaultActiveId();
     },
     setDefaultActiveId() {
-      this.updateSelectedId(this.defaultActiveId || this.tabs[0].id);
+      if (this.tabs.length) 
+        this.updateSelectedId(this.defaultActiveId || this.tabs[0].id);
     },
     getTabsInfo() {
       this.$children.forEach(vm => {
@@ -78,26 +79,28 @@ export default {
       this.$nextTick(() => {
         const activeTab = this.$el.querySelector(".g-tabs-nav.active");
         const { width, height, left, top } = activeTab.getBoundingClientRect();
-        const marginLeft = this.$el.getBoundingClientRect().left;
-        const marginTop = this.$el.getBoundingClientRect().top;
+
+        const tabWrapper = this.$refs.tabNavWrapper;
+        const tabWidth = tabWrapper.getBoundingClientRect().width;
+        const tabLeft = tabWrapper.getBoundingClientRect().left;
+        const tabTop = tabWrapper.getBoundingClientRect().top;
+
         const activeLine = this.$refs.activeLine;
 
         if (this.tabPosition === "top") {
           activeLine.style.width = `${width}px`;
-          activeLine.style.transform = `translate(${left -
-            marginLeft}px, -1px)`;
+          activeLine.style.transform = `translate(${left - tabLeft}px, -1px)`;
         } else if (this.tabPosition === "bottom") {
           activeLine.style.width = `${width}px`;
           activeLine.style.transform = `translate(${left -
-            marginLeft}px, -${height}px)`;
+            tabLeft}px, -${height}px)`;
         } else if (this.tabPosition === "right") {
           activeLine.style.height = `${height + 1}px`;
-          activeLine.style.transform = `translate(-${left -
-            marginLeft +
-            1}px, ${top - marginTop}px)`;
+          activeLine.style.transform = `translate(-${tabWidth}px, ${top -
+            tabTop}px)`;
         } else {
           activeLine.style.height = `${height}px`;
-          activeLine.style.transform = `translate(0px, ${top - marginTop}px)`;
+          activeLine.style.transform = `translate(2px, ${top - tabTop}px)`;
         }
       });
     }
@@ -167,6 +170,10 @@ export default {
         border-right: 1px solid $border-active-color;
       }
     }
+
+    .g-tabs-pane-wraper {
+      flex-grow: 1;
+    }
   }
   
   &-nav-wraper {
@@ -210,6 +217,7 @@ export default {
 
   &-pane {
     padding: .5em;
+    flex-grow: 1;
   }
 }
 </style>
