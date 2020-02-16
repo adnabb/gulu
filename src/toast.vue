@@ -58,7 +58,7 @@ export default {
 
 .g-toast {
   display: flex;
-  position: absolute;
+  position: fixed;
   box-shadow: $box-shadow; background-color: #fff;
   padding: 0 $toast-padding-width 0 $toast-padding-width;
   border-radius: $border-radius;
