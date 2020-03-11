@@ -14,6 +14,7 @@ import Toast from './toast';
 import MyPlugin from './my-plugins';
 import Tabs from './tabs';
 import TabPane from './tab-pane';
+import Popover from './popover';
 
 Vue.use(MyPlugin);
 
@@ -35,6 +36,7 @@ new Vue({
     'g-toast': Toast,
     'g-tabs': Tabs,
     'g-tab-pane': TabPane,
+    'g-popover': Popover,
   },
   data() {
     return {
