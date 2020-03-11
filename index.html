@@ -92,6 +92,17 @@
 
 <body>
     <div id="app">
+        不同触发方式
+        <div style="margin: 20px 0">
+            <g-popover trigger="click">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>click触发</g-button>
+            </g-popover>
+            <g-popover trigger="hover">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>hover触发</g-button>
+            </g-popover>
+        </div>
         不同提示位置
         <div style="margin: 20px 0">
             <g-popover position="top">

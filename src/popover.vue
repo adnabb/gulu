@@ -3,7 +3,7 @@
     <div class="g-popover" :class="[`popover-position-${position}`]" ref="popover" v-show="show">
       <slot name="content"></slot>
     </div>
-    <span class="g-popover-trigger" ref="reference" @click.stop="triggerPopover">
+    <span class="g-popover-trigger" ref="reference">
       <slot></slot>
     </span>
   </span>
@@ -20,19 +20,40 @@ export default {
         return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
       },
     },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator(value) {
+        return ['click', 'hover'].indexOf(value) >= 0;
+      },
+    }
   },
   mounted() {
+    this.initTriggerEvent();
     this.movePopoverToBody();
   },
   data() {
     return {
       show: false,
+      duration: 1000,
     };
   },
   methods: {
-    triggerPopover() {
+    initTriggerEvent() {
+      const { reference } = this.$refs;
+
+      if (this.trigger === 'click') {
+        reference.addEventListener('click', this.triggerPopover);
+      } else if (this.trigger === 'hover') {
+        reference.addEventListener('mouseover', this.triggerPopover);
+        reference.addEventListener('mouseout', this.triggerPopover);
+      }
+    },
+    triggerPopover(e) {
+      e.stopPropagation();
+
       if (this.show) {
-        this.closePopover();
+        setTimeout(this.closePopover, this.duration);
       } else {
         this.showPopover();
       }
@@ -70,6 +91,19 @@ export default {
       const popoverDom = this.$refs.popover;
       document.body.appendChild(popoverDom);
     },
+    removeTriggerEvent() {
+      const { reference } = this.$refs;
+
+      if (this.trigger === 'click') {
+        reference.removeEventListener('click', this.triggerPopover);
+      } else if (this.trigger === 'hover') {
+        reference.removeEventListener('mouseover', this.triggerPopover);
+        reference.removeEventListener('mouseout', this.triggerPopover);
+      }
+    }
+  },
+  destroyed () {
+    this.removeTriggerEvent();
   },
 };
 </script>
