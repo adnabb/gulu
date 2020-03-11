@@ -55,6 +55,7 @@ export default {
       const { popover, reference } = this.$refs;
       const { height, width, top, left } = reference.getBoundingClientRect();
       const { height: popoverHeight, width: popoverWidth } = popover.getBoundingClientRect();
+      const { scrollY, scrollX } = window;
       const offset = 10;
       const positionMap = {
         top: { top: top - popoverHeight - offset, left},
@@ -62,8 +63,8 @@ export default {
         left: { top, left: left - popoverWidth - offset},
         right: { top, left: left + width + offset},
       };
-      popover.style.top = `${positionMap[this.position].top}px`;
-      popover.style.left = `${positionMap[this.position].left}px`;
+      popover.style.top = `${positionMap[this.position].top + scrollY}px`;
+      popover.style.left = `${positionMap[this.position].left + scrollX}px`;
     },
     movePopoverToBody() {
       const popoverDom = this.$refs.popover;
