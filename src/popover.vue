@@ -3,7 +3,7 @@
     <div class="g-popover" ref="popover" v-show="show">
       <slot name="content"></slot>
     </div>
-    <span ref="reference" @click="triggerPopover">
+    <span ref="reference" @click.stop="triggerPopover">
       <slot></slot>
     </span>
   </span>
@@ -22,9 +22,25 @@ export default {
   },
   methods: {
     triggerPopover() {
-      this.show = !this.show;
+      if (this.show) {
+        this.closePopover();
+      } else {
+        this.showPopover();
+      }
+    },
+    showPopover() {
+      this.show = true;
+      this.positionPopover();
+      document.addEventListener('click', this.clickEvent);
+    },
+    closePopover() {
+      this.show = false;
+      document.removeEventListener('click', this.clickEvent);
+    },
+    clickEvent(e) {
+      if (this.$refs.popover.contains(e.target)) return;
 
-      if (this.show) this.positionPopover();
+      this.closePopover();
     },
     positionPopover() {
       const button = this.$refs.reference;
