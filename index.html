@@ -92,6 +92,25 @@
 
 <body>
     <div id="app">
+        不同提示位置
+        <div style="margin: 20px 0">
+            <g-popover position="top">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>头部显示提示内容</g-button>
+            </g-popover>
+            <g-popover position="bottom">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>尾部提示内容</g-button>
+            </g-popover>
+            <g-popover position="left">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>左侧显示提示内容</g-button>
+            </g-popover>
+            <g-popover position="right">
+                <p slot="content"> 这里是提示内容。 </p>
+                <g-button>右侧提示内容</g-button>
+            </g-popover>
+        </div>
         气泡提示
         <div style="margin: 80px 0 20px 0">
             <g-popover>
@@ -100,11 +119,7 @@
             </g-popover>
             <g-popover>
                 <p slot="content"> 这里是超级长的内容。 这里是超级长的内容。 这里是超级长的内容。 这里是超级长的内容。 这里是超级长的内容。 这里是超级长的内容。 </p>
-                <g-button>点击显示提示内容</g-button>
-            </g-popover>
-            <g-popover>
-                <p slot="content"> 这里是提示内容。 </p>
-                <g-button>点击显示提示内容</g-button>
+                <g-button>点击显示超长内容</g-button>
             </g-popover>
         </div>
         可以改变位置的tab

@@ -1,9 +1,9 @@
 <template>
   <span class="g-popover-container">
-    <div class="g-popover" ref="popover" v-show="show">
+    <div class="g-popover" :class="[`popover-position-${position}`]" ref="popover" v-show="show">
       <slot name="content"></slot>
     </div>
-    <span ref="reference" @click.stop="triggerPopover">
+    <span class="g-popover-trigger" ref="reference" @click.stop="triggerPopover">
       <slot></slot>
     </span>
   </span>
@@ -12,6 +12,15 @@
 <script>
 export default {
   name: "GuluPopover",
+  props: {
+    position: {
+      type: String,
+      default: 'top',
+      validator(value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
+      },
+    },
+  },
   mounted() {
     this.movePopoverToBody();
   },
@@ -30,7 +39,7 @@ export default {
     },
     showPopover() {
       this.show = true;
-      this.positionPopover();
+      this.$nextTick(() => this.positionPopover());
       document.addEventListener('click', this.clickEvent);
     },
     closePopover() {
@@ -45,9 +54,23 @@ export default {
     positionPopover() {
       const button = this.$refs.reference;
       const { popover } = this.$refs;
-      const { height, top, left } = button.getBoundingClientRect();
-      popover.style.top = `${top - 10}px`; // 往上面多移动10px
-      popover.style.left = `${left}px`;
+      const { height, width, top, left } = button.getBoundingClientRect();
+      const { height: popoverHeight, width: popoverWidth } = popover.getBoundingClientRect();
+      const offset = 10;
+
+      if (this.position === 'top') {
+        popover.style.top = `${top - popoverHeight - offset}px`;
+        popover.style.left = `${left}px`;
+      } else if (this.position === 'bottom') {
+        popover.style.top = `${top + popoverHeight + offset}px`;
+        popover.style.left = `${left}px`;
+      } else if (this.position === 'left') {
+        popover.style.top = `${top}px`;
+        popover.style.left = `${left - popoverWidth - offset}px`;
+      } else if (this.position === 'right') {
+        popover.style.top = `${top}px`;
+        popover.style.left = `${left + width + offset}px`;
+      }
     },
     movePopoverToBody() {
       const popoverDom = this.$refs.popover;
@@ -70,26 +93,77 @@ export default {
   border-radius: $border-radius;
   position: absolute;
   background: $popover-bg;
-  transform: translateY(-100%);
   max-width: 300px;
 
   &::before, &::after {
     content: '';
     border: 5px solid;
-    border-bottom: none;
     width: 0;
     height: 0;
     position: absolute;
-    top: 100%;
+    border-color: rgba($color: $popover-bg, $alpha: 0)
+  }
+  
+  &.popover-position-top {
+
+    &::before, &::after {
+      top: 100%;
+      border-bottom: none;
+    }
+
+    &::before {
+      border-top-color: $border-color;
+    }
+
+    &::after {
+      margin-top: -1.4px;
+      border-top-color: $popover-bg;
+    }
   }
 
-  &::before {
-    border-color: $border-color transparent transparent transparent;
+  &.popover-position-bottom {
+    &::before, &::after {
+      bottom: 100%;
+      border-top: none;
+      border-bottom-color: $border-color;
+    }
+
+    &::after {
+      border-bottom-color: $popover-bg;
+      margin-bottom: -1.4px;
+    }
   }
 
-  &::after {
-    border-color: $popover-bg transparent transparent transparent;
-    margin-top: -1.4px;
+  &.popover-position-left {
+    &::before, &::after {
+      left: 100%;
+      top: .5em;
+      border-right: none;
+      border-left-color: $border-color;
+    }
+
+    &::after {
+      border-left-color: $popover-bg;
+      margin-left: -1.4px;
+    }
+  }
+
+  &.popover-position-right {
+    &::before, &::after {
+      right: 100%;
+      top: .5em;
+      border-left: none;
+      border-right-color: $border-color;
+    }
+
+    &::after {
+      border-right-color: $popover-bg;
+      margin-right: -1.4px;
+    }
+  }
+
+  &-trigger {
+    display: inline-block;
   }
 }
 </style>
