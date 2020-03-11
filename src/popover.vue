@@ -52,25 +52,18 @@ export default {
       this.closePopover();
     },
     positionPopover() {
-      const button = this.$refs.reference;
-      const { popover } = this.$refs;
-      const { height, width, top, left } = button.getBoundingClientRect();
+      const { popover, reference } = this.$refs;
+      const { height, width, top, left } = reference.getBoundingClientRect();
       const { height: popoverHeight, width: popoverWidth } = popover.getBoundingClientRect();
       const offset = 10;
-
-      if (this.position === 'top') {
-        popover.style.top = `${top - popoverHeight - offset}px`;
-        popover.style.left = `${left}px`;
-      } else if (this.position === 'bottom') {
-        popover.style.top = `${top + popoverHeight + offset}px`;
-        popover.style.left = `${left}px`;
-      } else if (this.position === 'left') {
-        popover.style.top = `${top}px`;
-        popover.style.left = `${left - popoverWidth - offset}px`;
-      } else if (this.position === 'right') {
-        popover.style.top = `${top}px`;
-        popover.style.left = `${left + width + offset}px`;
-      }
+      const positionMap = {
+        top: { top: top - popoverHeight - offset, left},
+        bottom: { top: top + popoverHeight + offset, left},
+        left: { top, left: left - popoverWidth - offset},
+        right: { top, left: left + width + offset},
+      };
+      popover.style.top = `${positionMap[this.position].top}px`;
+      popover.style.left = `${positionMap[this.position].left}px`;
     },
     movePopoverToBody() {
       const popoverDom = this.$refs.popover;
@@ -103,62 +96,26 @@ export default {
     position: absolute;
     border-color: rgba($color: $popover-bg, $alpha: 0)
   }
-  
-  &.popover-position-top {
 
-    &::before, &::after {
-      top: 100%;
-      border-bottom: none;
-    }
+  @each $position in top, bottom, left, right {
+    &.popover-position-#{$position} {
+      &::before, &::after {
+        #{$position}: 100%;
 
-    &::before {
-      border-top-color: $border-color;
-    }
+        @if #{$position} == top { border-bottom: none; }
+        @if #{$position} == bottom { border-top: none; }
+        @if #{$position} == left { top: .5em; border-right: none; }
+        @if #{$position} == right { top: .5em; border-left: none;}
+      }
 
-    &::after {
-      margin-top: -1.4px;
-      border-top-color: $popover-bg;
-    }
-  }
+      &::before {
+        border-#{$position}-color: $border-color;
+      }
 
-  &.popover-position-bottom {
-    &::before, &::after {
-      bottom: 100%;
-      border-top: none;
-      border-bottom-color: $border-color;
-    }
-
-    &::after {
-      border-bottom-color: $popover-bg;
-      margin-bottom: -1.4px;
-    }
-  }
-
-  &.popover-position-left {
-    &::before, &::after {
-      left: 100%;
-      top: .5em;
-      border-right: none;
-      border-left-color: $border-color;
-    }
-
-    &::after {
-      border-left-color: $popover-bg;
-      margin-left: -1.4px;
-    }
-  }
-
-  &.popover-position-right {
-    &::before, &::after {
-      right: 100%;
-      top: .5em;
-      border-left: none;
-      border-right-color: $border-color;
-    }
-
-    &::after {
-      border-right-color: $popover-bg;
-      margin-right: -1.4px;
+      &::after {
+        margin-#{$position}: -1.4px;
+        border-#{$position}-color: $popover-bg;
+      }
     }
   }
 
