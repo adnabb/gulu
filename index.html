@@ -92,10 +92,22 @@
 
 <body>
     <div id="app">
+        弹出框内点击关闭
+        <div style="margin: 40px 0">
+            <g-popover>
+                <template v-slot:content="{close}">
+                    <p>
+                        <span>这里是提示内容</span>
+                        <g-button @click="close">关闭</g-button>
+                    </p>
+                </template>
+                <g-button>click触发</g-button>
+            </g-popover>
+        </div>
         不同触发方式
         <div style="margin: 20px 0">
             <g-popover trigger="click">
-                <p slot="content"> 这里是提示内容。 </p>
+                <template slot="content"> 这里是提示内容。 </template>
                 <g-button>click触发</g-button>
             </g-popover>
             <g-popover trigger="hover">

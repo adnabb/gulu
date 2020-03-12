@@ -1,9 +1,11 @@
 <template>
   <span class="g-popover-container">
     <div class="g-popover" :class="[`popover-position-${position}`]" ref="popover" v-show="show">
-      <slot name="content"></slot>
+      <div> <!-- 为了防止用户没有用元素包裹，直接使用template导致样式问题 -->
+        <slot name="content" :close="closePopover"></slot>
+      </div>
     </div>
-    <span class="g-popover-trigger" ref="reference">
+    <span class="g-popover-reference" ref="reference">
       <slot></slot>
     </span>
   </span>
@@ -154,7 +156,7 @@ export default {
     }
   }
 
-  &-trigger {
+  &-reference {
     display: inline-block;
   }
 }
