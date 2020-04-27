@@ -92,6 +92,22 @@
 
 <body>
     <div id="app">
+        <div style="margin: 20px 0;">
+            折叠面板 - 默认展示一个面板
+            <g-collapse :selected.sync="selectedCollapseItem2" single>
+                <g-collapse-item name="item1">item1 content</g-collapse-item>
+                <g-collapse-item name="item2">item2 content</g-collapse-item>
+                <g-collapse-item name="item3">item3 content</g-collapse-item>
+            </g-collapse>
+        </div>
+        <div style="margin: 20px 0;">
+            默认折叠面板
+            <g-collapse :selected.sync="selectedCollapseItem">
+                <g-collapse-item name="item1">item1 content</g-collapse-item>
+                <g-collapse-item name="item2">item2 content</g-collapse-item>
+                <g-collapse-item name="item3">item3 content</g-collapse-item>
+            </g-collapse>
+        </div>
         弹出框内点击关闭
         <div style="margin: 40px 0">
             <g-popover>

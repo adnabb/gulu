@@ -15,6 +15,8 @@ import MyPlugin from './my-plugins';
 import Tabs from './tabs';
 import TabPane from './tab-pane';
 import Popover from './popover';
+import Collapse from './collapse';
+import CollapseItem from './collapse-item';
 
 Vue.use(MyPlugin);
 
@@ -37,6 +39,8 @@ new Vue({
     'g-tabs': Tabs,
     'g-tab-pane': TabPane,
     'g-popover': Popover,
+    'g-collapse': Collapse,
+    'g-collapse-item': CollapseItem,
   },
   data() {
     return {
@@ -45,7 +49,9 @@ new Vue({
       loading3: false,
       loading4: false,
       value: '',
-      tabPosition: 'top'
+      tabPosition: 'top',
+      selectedCollapseItem2: 'item1',
+      selectedCollapseItem: ['item1', 'item2'],
     };
   },
   methods: {
