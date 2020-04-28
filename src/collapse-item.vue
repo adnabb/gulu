@@ -1,5 +1,5 @@
 <template>
-  <div class="g-collpase-item">
+  <div class="g-collpase-item" :class="{active: !this.hidden}" :data-name="name">
     <div class="g-collpase-item-header" @click="triggerContent">{{ name }}</div>
     <div class="g-collpase-item-content" :class="{hidden}">
       <slot></slot>
