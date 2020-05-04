@@ -93,6 +93,10 @@
 <body>
     <div id="app">
         <div style="margin: 20px 0;">
+            级联选择
+            <g-cascader :source="cascaderSource" :selected.sync="cascaderSelected"></g-cascader>
+        </div>
+        <div style="margin: 20px 0;">
             折叠面板 - 默认展示一个面板
             <g-collapse :selected.sync="selectedCollapseItem2" single>
                 <g-collapse-item name="item1">item1 content</g-collapse-item>
