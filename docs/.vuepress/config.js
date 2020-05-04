@@ -2,7 +2,7 @@ module.exports = {
   title: 'Vue UI Framework',
   description: '一个基于Vue的组件库',
   themeConfig: {
-    lastUpdated: 'Last Updated', // string | boolean,
+    lastUpdated: '上次更新', // string | boolean,
     nav: [
       { text: '主页', link: '/' },
       { text: '开发指南', link: '/guide/' },
