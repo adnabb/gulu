@@ -92,8 +92,16 @@
 
 <body>
     <div id="app">
+        <!-- <div style="margin: 20px 0;">
+            级联选择器 - 自定义触发器
+            <g-cascader :source="cascaderSource" :selected.sync="cascaderSelected3"></g-cascader>
+        </div> -->
         <div style="margin: 20px 0;">
-            级联选择器（有默认值）
+            级联选择器 - 选项可禁用
+            <g-cascader :source="cascaderSource2" :selected.sync="cascaderSelected3"></g-cascader>
+        </div>
+        <div style="margin: 20px 0;">
+            级联选择器 - 有默认值
             <g-cascader :source="cascaderSource" :selected.sync="cascaderSelected2"></g-cascader>
         </div>
         <div style="margin: 20px 0;">

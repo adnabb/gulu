@@ -4,7 +4,7 @@
       <div
         v-for="(item, index) in source"
         class="g-cascader-item"
-        :class="{'active': selected && selected[level] && selected[level].value === item.value}"
+        :class="{'active': selected && selected[level] && selected[level].value === item.value, 'disabled': item.disabled}"
         :key="`level-${level}-${index}`"
         @click="showChildren(item)"
       >
@@ -58,11 +58,12 @@ export default {
   },
   methods: {
     showChildren(item) {
+      if (item.disabled) return;
       const copy = JSON.parse(JSON.stringify(this.selected));
       copy[this.level] = item;
       copy.splice(this.level + 1);
       this.$emit('update:selected', copy);
-      if (!item.children || !item.children.length) { this.$emit('hide'); }
+      if (!item.children || !item.children.length) this.$emit('hide');
     },
     updateSelected(selected) {
       this.$emit('update:selected', selected);
@@ -96,6 +97,13 @@ export default {
       color: $font-active-color;
       .g-cascader-item-right-arrow {
         color: $font-active-color;
+      }
+    }
+    &.disabled {
+      color: $font-disabled-color;
+      cursor: not-allowed;
+      .g-cascader-item-right-arrow {
+        color: $font-disabled-color;
       }
     }
     &:hover {
