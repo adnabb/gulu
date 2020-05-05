@@ -250,6 +250,7 @@ new Vue({
         }]
       }],
       cascaderSelected: [],
+      cascaderSelected2: ['zhinan', 'daohang', 'cexiangdaohang'],
     };
   },
   methods: {

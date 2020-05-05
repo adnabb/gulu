@@ -45,16 +45,36 @@ export default {
       visible: false
     };
   },
-  mounted () {
+  mounted() {
+    this.initSelected();
   },
   methods: {
+    initSelected() {
+      if (!this.selected.length) return;
+      const selected = this.findSelectedItemByValue();
+      this.updateSelected(selected);
+    },
+    findSelectedItemByValue() {
+      const selected = [];
+      this.selected.forEach((item, index) => {
+        const value = item.value || item;
+        if (index === 0) {
+          selected.push(this.source.filter(item => item.value === value)[0]);
+        } else {
+          selected.push(
+            selected[index - 1].children.filter(item => item.value === value)[0]
+          );
+        }
+      });
+      return selected;
+    },
     updateSelected(selected) {
       this.$emit('update:selected', selected);
     },
     hideList() {
       this.visible = false;
     }
-  },
+  }
 };
 </script>
 
@@ -72,6 +92,7 @@ export default {
   }
   &-list-container {
     position: absolute;
+    z-index: 1;
     top: 100%;
     left: 0;
     margin-top: .5em;
