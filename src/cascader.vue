@@ -6,10 +6,12 @@
       <g-input readonly :value="selectedString"></g-input>
     </div>
     <g-cascader-list
+      class="g-cascader-list-container"
       v-if="visible"
       :source="source"
       :selected="selected"
       @update:selected="updateSelected"
+      @hide="hideList"
     ></g-cascader-list>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
   },
   computed: {
     selectedString() {
-      return this.selected.map((item) => item.name).join('/');
+      return this.selected.map(item => item.name).join(' / ');
     }
   },
   data() {
@@ -43,26 +45,38 @@ export default {
       visible: false
     };
   },
+  mounted () {
+  },
   methods: {
     updateSelected(selected) {
       this.$emit('update:selected', selected);
-    }
-  },
-  watch: {
-    selected(newValue, oldValue) {
-      console.log(1, 'new', newValue);
+    },
+    hideList() {
+      this.visible = false;
     }
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+// 删除scope，否则input cursor的样式无法覆盖
+@import "./styles/variables";
+
 .g-cascader {
+  position: relative;
   &-trigger {
-    cursor: pointer;
+    display: inline-block;
+    input {
+      cursor: pointer;
+    }
   }
-  &-list {
-    border: 1px solid red;
+  &-list-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: .5em;
+    background: $cascader-list-bg;
+    border-radius: $border-radius;
   }
 }
 </style>
