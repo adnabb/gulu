@@ -1,5 +1,5 @@
 <template>
-  <div class="g-cascader">
+  <div class="g-cascader" ref="cascader">
     <div class="g-cascader-trigger" @click="visible = !visible">
       <!-- TODO:可以自定义trigger -->
       <!-- <slot></slot> -->
@@ -47,8 +47,12 @@ export default {
   },
   mounted() {
     this.initSelected();
+    document.body.addEventListener('click', this.autoHideList);
   },
   methods: {
+    autoHideList(e) {
+      if (!this.$refs.cascader.contains(e.target)) this.hideList();
+    },
     initSelected() {
       if (!this.selected.length) return;
       const selected = this.findSelectedItemByValue();
@@ -74,7 +78,10 @@ export default {
     hideList() {
       this.visible = false;
     }
-  }
+  },
+  destroyed () {
+    document.body.removeEventListener('click', this.autoHideList);
+  },
 };
 </script>
 
@@ -84,8 +91,8 @@ export default {
 
 .g-cascader {
   position: relative;
+  display: inline-block;
   &-trigger {
-    display: inline-block;
     input {
       cursor: pointer;
     }
@@ -98,6 +105,7 @@ export default {
     margin-top: .5em;
     background: $cascader-list-bg;
     border-radius: $border-radius;
+    @extend %box-shadow;
   }
 }
 </style>

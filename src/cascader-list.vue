@@ -8,7 +8,7 @@
         :key="`level-${level}-${index}`"
         @click="showChildren(item)"
       >
-        <span>{{item.name}}</span>
+        <span class="g-cascader-item-name">{{item.name}}</span>
         <g-icon class="g-cascader-item-right-arrow" v-if="item.children" icon="arrow-right"></g-icon>
       </div>
     </div>
@@ -80,8 +80,8 @@ export default {
 
 .g-cascader {
   &-list {
-    display: inline-flex;
-    max-height: 200px;
+    display: flex;
+    height: 200px;
     border: 1px solid $border-color;
 
     .g-cascader-list {
@@ -90,8 +90,8 @@ export default {
     }
   }
   &-item {
-    padding: 0.5em 1em;
-    min-width: 80px;
+    padding: 0.5em 2em 0.5em 1em;
+    position: relative;
     cursor: pointer;
     &.active {
       color: $font-active-color;
@@ -111,11 +111,17 @@ export default {
     }
     &-right-arrow {
       font-size: 10px;
-      vertical-align: -1px;
       color: $collapse-item-arrow-color;
+      position: absolute;
+      height: 100%;
+      top: 1px;
+      right: 1em;
     }
     &-container {
-      overflow: auto;
+      overflow-y: auto;
+      min-width: 100px;
+      // 设置后长度不会换行
+      width: max-content;
     }
   }
 }

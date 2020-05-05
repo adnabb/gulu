@@ -59,9 +59,10 @@ export default {
 .g-toast {
   display: flex;
   position: fixed;
-  box-shadow: $box-shadow; background-color: #fff;
+  background-color: #fff;
   padding: 0 $toast-padding-width 0 $toast-padding-width;
   border-radius: $border-radius;
+  @extend %box-shadow;
 
 
   .g-toast-text, .custom-close { display: inline-block; padding: $toast-padding-height 0; }

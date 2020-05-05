@@ -26,6 +26,8 @@ $collapse-item-bg: #f7f7f7;
 $collapse-item-arrow-color: #606266;
 $collapse-item-hover-bg: #f5f5f5;
 
-$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
 $red: #f56c6c;
+
+%box-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
