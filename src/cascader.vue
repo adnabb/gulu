@@ -1,6 +1,6 @@
 <template>
   <div class="g-cascader" ref="cascader">
-    <div class="g-cascader-trigger" @click="visible = !visible">
+    <div class="g-cascader-trigger" @click="triggerList">
       <!-- TODO:可以自定义trigger -->
       <!-- <slot></slot> -->
       <g-input readonly :value="selectedString"></g-input>
@@ -11,7 +11,7 @@
       :source="source"
       :selected="selected"
       @update:selected="updateSelected"
-      @hide="hideList"
+      @hide="hide"
     ></g-cascader-list>
   </div>
 </template>
@@ -47,11 +47,17 @@ export default {
   },
   mounted() {
     this.initSelected();
-    document.body.addEventListener('click', this.autoHideList);
   },
   methods: {
+    triggerList() {
+      if (this.visible) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    },
     autoHideList(e) {
-      if (!this.$refs.cascader.contains(e.target)) this.hideList();
+      if (!this.$refs.cascader.contains(e.target)) this.hide();
     },
     initSelected() {
       if (!this.selected.length) return;
@@ -75,13 +81,15 @@ export default {
     updateSelected(selected) {
       this.$emit('update:selected', selected);
     },
-    hideList() {
+    show() {
+      this.visible = true;
+      document.addEventListener('click', this.autoHideList);
+    },
+    hide() {
       this.visible = false;
+      document.removeEventListener('click', this.autoHideList);
     }
-  },
-  destroyed () {
-    document.body.removeEventListener('click', this.autoHideList);
-  },
+  }
 };
 </script>
 
