@@ -1,5 +1,5 @@
 <template>
-  <div class="g-cascader" ref="cascader">
+  <div class="g-cascader" v-click-outside="hide">
     <div class="g-cascader-trigger" @click="triggerList">
       <!-- TODO:可以自定义trigger -->
       <!-- <slot></slot> -->
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import clickOutside from './click-outside';
 import Input from './input';
 import CascaderList from './cascader-list';
 export default {
@@ -34,6 +35,9 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  directives: {
+    clickOutside,
   },
   computed: {
     selectedString() {
@@ -56,8 +60,11 @@ export default {
         this.show();
       }
     },
-    autoHideList(e) {
-      if (!this.$refs.cascader.contains(e.target)) this.hide();
+    show() {
+      this.visible = true;
+    },
+    hide() {
+      this.visible = false;
     },
     initSelected() {
       if (!this.selected.length) return;
@@ -80,14 +87,6 @@ export default {
     },
     updateSelected(selected) {
       this.$emit('update:selected', selected);
-    },
-    show() {
-      this.visible = true;
-      document.addEventListener('click', this.autoHideList);
-    },
-    hide() {
-      this.visible = false;
-      document.removeEventListener('click', this.autoHideList);
     }
   }
 };
