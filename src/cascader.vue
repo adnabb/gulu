@@ -11,6 +11,7 @@
       :source="source"
       :selected="selected"
       :loadData="loadData"
+      :propLoading="isLoading"
       @update:selected="updateSelected"
       @hide="hide"
     ></g-cascader-list>
@@ -50,7 +51,8 @@ export default {
   },
   data() {
     return {
-      visible: false
+      visible: false,
+      isLoading: false,
     };
   },
   mounted() {
@@ -59,8 +61,13 @@ export default {
   },
   methods: {
     lazyLoadData() {
+      this.isLoading = true;
       this.loadData().then(res => {
+        this.isLoading = false;
         this.$emit('update:source', res);
+      }).catch((err) => {
+        console.error('err', err);
+        this.isLoading = false;
       });
     },
     triggerList() {

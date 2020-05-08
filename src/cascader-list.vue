@@ -1,28 +1,46 @@
 <template>
-  <div class="g-cascader-list">
-    <div class="g-cascader-item-container">
-      <div
-        v-for="(item, index) in source"
-        class="g-cascader-item"
-        :class="{'active': selected && selected[level] && selected[level].value === item.value, 'disabled': item.disabled}"
-        :key="`level-${level}-${index}`"
-        @click="showChildren(item)"
-      >
-        <span class="g-cascader-item-name">{{item.name}}</span>
-        <g-icon :class="iconClass" v-if="item.children || item.isLeaf === false" :icon="iconStyle"></g-icon>
+  <div :class="['g-cascader-list', {'loading': propLoading}]">
+    <template v-if="propLoading">
+      <g-icon icon="loading" class="g-loading"></g-icon>
+    </template>
+    <template v-else>
+      <div class="g-cascader-item-container">
+        <div
+          v-for="(item, index) in source"
+          class="g-cascader-item"
+          :class="getItemClasses(item)"
+          :key="`level-${level}-${index}`"
+          @click="showChildren(item)"
+        >
+          <span class="g-cascader-item-name">{{item.name}}</span>
+          <template v-if="loadData">
+            <g-icon
+              :class="getIconClasses(item.value)"
+              v-if="!item.isLeaf"
+              :icon="getIconStyle(item.value)"
+            ></g-icon>
+          </template>
+          <template v-else>
+            <g-icon
+              class="g-cascader-item-right-arrow"
+              v-if="item.children && item.children.length > 0"
+              icon="arrow-right"
+            ></g-icon>
+          </template>
+        </div>
       </div>
-    </div>
-    <gulu-cascader-list
-      v-if="childrenList.length"
-      class="g-cascader-selected-children"
-      :source="childrenList"
-      :level="level+1"
-      :selected="selected"
-      :loadData="loadData"
-      @update:selected="updateSelected"
-      @update:source="updateSource"
-      @hide="hide"
-    ></gulu-cascader-list>
+      <gulu-cascader-list
+        v-if="childrenList.length"
+        class="g-cascader-selected-children"
+        :source="childrenList"
+        :level="level+1"
+        :selected="selected"
+        :loadData="loadData"
+        @update:selected="updateSelected"
+        @update:source="updateSource"
+        @hide="hide"
+      ></gulu-cascader-list>
+    </template>
   </div>
 </template>
 
@@ -47,10 +65,15 @@ export default {
     },
     loadData: {
       type: Function
+    },
+    propLoading: {
+      type: Boolean
     }
   },
   data() {
-    return {};
+    return {
+      isLoading: false
+    };
   },
   computed: {
     childrenList() {
@@ -59,22 +82,27 @@ export default {
         return currentItem.children;
       }
       return [];
-    },
-    iconStyle() {
-      return this.loadData
-        ? this.selected.children
-          ? 'loading'
-          : 'arrow-right'
-        : 'arrow-right';
-    },
-    iconClass() {
-      return [
-        'g-cascader-item-right-arrow',
-        { 'g-loading': this.iconStyle === 'loading' }
-      ];
     }
   },
   methods: {
+    getItemClasses(item) {
+      return {
+        active:
+          this.selected && this.selected[this.level] && this.selected[this.level].value === item.value,
+        disabled: item.disabled
+      };
+    },
+    getIconStyle(value) {
+      return this.isLoading &&
+        this.selected[this.level] &&
+        this.selected[this.level].value &&
+        this.selected[this.level].value === value
+        ? 'loading'
+        : 'arrow-right';
+    },
+    getIconClasses(value) {
+      return ['g-cascader-item-right-arrow', `g-${this.getIconStyle(value)}`];
+    },
     showChildren(item) {
       // children是根据this.selected[this.level]是否有children进行加载的
       if (this.loadData) {
@@ -86,7 +114,7 @@ export default {
       }
     },
     showLazyLoadChildren(item) {
-      if (!item.isLeaf) {
+      if (!item.isLeaf && !item.children) {
         this.lazyLoadData(item);
       } else {
         this.packageAndUpdateSelected(item);
@@ -94,12 +122,19 @@ export default {
       }
     },
     lazyLoadData(item) {
-      this.loadData(item.id).then(res => {
-        this.$set(item, 'children', res);
-        this.packageAndUpdateSelected(item);
-        this.packageAndUpdateSource(item);
-        if (item.isLeaf) this.hide();
-      });
+      this.isLoading = true;
+      this.packageAndUpdateSelected(item);
+      this.loadData(item.id)
+        .then(res => {
+          this.isLoading = false;
+          this.$set(item, 'children', res);
+          this.packageAndUpdateSource(item);
+          if (item.isLeaf) this.hide();
+        })
+        .catch(err => {
+          console.error('err', err);
+          this.isLoading = false;
+        });
     },
     packageAndUpdateSource(item) {
       const copy = JSON.parse(JSON.stringify(this.source));
@@ -122,6 +157,10 @@ export default {
     },
     packageAndUpdateSelected(item) {
       const selected = JSON.parse(JSON.stringify(this.selected));
+      // TODO:
+      // 期待的效果：点击过的子元素不需要再load加载
+      // 该方法的问题: vue不推荐直接修改props传过来的属性
+      // const selected = this.selected;
       selected[this.level] = item;
       selected.splice(this.level + 1);
       this.updateSelected(selected);
@@ -147,6 +186,13 @@ export default {
     display: flex;
     height: 200px;
     border: 1px solid $border-color;
+
+    &.loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+    }
 
     .g-cascader-list {
       border: none;
