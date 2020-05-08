@@ -18,6 +18,10 @@ import Popover from './popover';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
 import Cascader from './cascader';
+import { province } from './static/regions/province';
+import { country } from './static/regions/country';
+import { city } from './static/regions/city';
+import { town } from './static/regions/town';
 
 Vue.use(MyPlugin);
 
@@ -452,9 +456,46 @@ new Vue({
       cascaderSelected: [],
       cascaderSelected2: ['zhinan', 'daohang', 'cexiangdaohang'],
       cascaderSelected3: [],
+      cascaderSelected4: [],
+      cascaderSource3: []
     };
   },
   methods: {
+    // 模拟后台取数据
+    loadData(id) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (!id) {
+            province.forEach((item) => {
+              item.value = item.name;
+              item.isLeaf = city[item.id] ? false : true;
+            });
+            resolve(province);
+          } else {
+            let result = [];
+            let flag = false;
+            if (city[id]) {
+              if (city[id].length === 1 && city[id][0].name === '市辖区') {
+                id = city[id][0].id;
+              } else {
+                result = city[id];
+              }
+            }
+            if (country[id]) {
+              result = country[id];
+            } else if (town[id]) {
+              result = town[id];
+              flag = true;
+            }
+            result.forEach((item) => {
+              item.value = item.name;
+              item.isLeaf = flag;
+            });
+            resolve(result);
+          }
+        }, 2000);
+      });
+    },
     changeTopPosition(position) {
       this.tabPosition = position;
     },

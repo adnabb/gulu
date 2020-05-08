@@ -10,6 +10,7 @@
       v-if="visible"
       :source="source"
       :selected="selected"
+      :loadData="loadData"
       @update:selected="updateSelected"
       @hide="hide"
     ></g-cascader-list>
@@ -34,10 +35,13 @@ export default {
     selected: {
       type: Array,
       default: () => []
+    },
+    loadData: {
+      type: Function
     }
   },
   directives: {
-    clickOutside,
+    clickOutside
   },
   computed: {
     selectedString() {
@@ -51,8 +55,14 @@ export default {
   },
   mounted() {
     this.initSelected();
+    if (this.loadData) this.lazyLoadData();
   },
   methods: {
+    lazyLoadData() {
+      this.loadData().then(res => {
+        this.$emit('update:source', res);
+      });
+    },
     triggerList() {
       if (this.visible) {
         this.hide();

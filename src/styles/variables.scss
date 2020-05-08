@@ -31,3 +31,11 @@ $red: #f56c6c;
 %box-shadow {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+@keyframes spin {
+  0% { transform: rotate(0); }
+
+  100% { transform: rotate(360deg); }
+}
+
+.g-loading { animation: spin .5s infinite linear; }

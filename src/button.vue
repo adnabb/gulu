@@ -55,14 +55,6 @@ export default {
   &:active {
     border-color: $border-active-color; color: $font-active-color;
   }
-
-  @keyframes spin {
-    0% { transform: rotate(0); }
-
-    100% { transform: rotate(360deg); }
-  }
-
-  .g-loading { animation: spin .5s infinite linear; }
   
   .button-text { display: inline-flex; }
 

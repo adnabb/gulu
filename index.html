@@ -118,6 +118,10 @@
             级联选择器 - 自定义触发器
             <g-cascader :source="cascaderSource" :selected.sync="cascaderSelected3"></g-cascader>
         </div> -->
+        级联选择器 - 动态加载省市县选择器
+        <div style="margin: 20px 0;">
+            <g-cascader :source.sync="cascaderSource3" :load-data="loadData" :selected.sync="cascaderSelected4"></g-cascader>
+        </div>
         级联选择器 - 选项可禁用
         <div style="margin: 20px 0;">
             <g-cascader :source="cascaderSource2" :selected.sync="cascaderSelected3"></g-cascader>
