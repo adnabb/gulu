@@ -493,7 +493,7 @@ new Vue({
             });
             resolve(result);
           }
-        }, 2000);
+        }, 600);
       });
     },
     changeTopPosition(position) {

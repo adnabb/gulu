@@ -39,7 +39,8 @@ export default {
     },
     loadData: {
       type: Function
-    }
+    },
+    // TODO:触发形式
   },
   directives: {
     clickOutside

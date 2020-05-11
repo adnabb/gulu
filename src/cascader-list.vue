@@ -174,7 +174,7 @@ export default {
     hide() {
       this.$emit('hide');
     }
-  }
+  },
 };
 </script>
 
