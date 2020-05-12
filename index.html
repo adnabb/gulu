@@ -112,9 +112,36 @@
     }
 </style>
 
+<style>
+    .g-carousel-item {
+        display: flex;
+        font-size: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <body>
     <div id="app">
+        
+        无缝轮播组件 - 自动播放
+        <div style="margin: 20px 0;">
+            <g-carousel :selected.sync="carouselSelected2">
+                <g-carousel-item name="1">1</g-carousel-item>
+                <g-carousel-item name="2">2</g-carousel-item>
+                <g-carousel-item name="3">3</g-carousel-item>
+            </g-carousel>
+        </div>
+        无缝轮播组件
+        <div style="margin: 20px 0;">
+            <g-carousel :selected.sync="carouselSelected" :auto-play="false">
+                <g-carousel-item name="1">1</g-carousel-item>
+                <g-carousel-item name="2">2</g-carousel-item>
+                <g-carousel-item name="3">3</g-carousel-item>
+            </g-carousel>
+        </div>
         <!-- <div style="margin: 20px 0;">
+            TODO: 
             级联选择器 - 自定义触发器
             <g-cascader :source="cascaderSource" :selected.sync="cascaderSelected3"></g-cascader>
         </div> -->
