@@ -22,6 +22,8 @@ import { province } from './static/regions/province';
 import { country } from './static/regions/country';
 import { city } from './static/regions/city';
 import { town } from './static/regions/town';
+import Carousel from './carousel';
+import CarouselItem from './carousel-item';
 
 Vue.use(MyPlugin);
 
@@ -47,6 +49,8 @@ new Vue({
     'g-collapse': Collapse,
     'g-collapse-item': CollapseItem,
     'g-cascader': Cascader,
+    'g-carousel': Carousel,
+    'g-carousel-item': CarouselItem,
   },
   data() {
     return {
@@ -457,7 +461,9 @@ new Vue({
       cascaderSelected2: ['zhinan', 'daohang', 'cexiangdaohang'],
       cascaderSelected3: [],
       cascaderSelected4: [],
-      cascaderSource3: []
+      cascaderSource3: [],
+      carouselSelected: '',
+      carouselSelected2: '',
     };
   },
   methods: {
