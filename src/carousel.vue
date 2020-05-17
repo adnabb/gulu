@@ -1,12 +1,11 @@
 <template>
-  <div
-    class="g-carousel"
-    @mouseover="onMouseover"
-    @mouseleave="onMouseLeave"
-    @touchstart="onTouchstart"
-    @touchend="onTouchend"
-  >
-    <div class="g-carousel-items-container" ref="itemsContainer">
+  <div class="g-carousel" @mouseover="onMouseover" @mouseleave="onMouseLeave">
+    <div
+      class="g-carousel-items-container"
+      ref="itemsContainer"
+      @touchstart="onTouchstart"
+      @touchend="onTouchend"
+    >
       <slot></slot>
     </div>
     <div class="g-carousel-subscript">
@@ -16,7 +15,7 @@
         :key="n-1"
         :class="['g-carousel-subscript-item', { 'active': selectedIndex === n - 1}]"
         @click="onClick(n - 1)"
-      >{{ n }}</span>
+      >{{ n - 1 }}</span>
     </div>
   </div>
 </template>
@@ -36,18 +35,20 @@ export default {
   data() {
     return {
       player: null,
-      lastIndex: -1,
+      lastSelectedIndex: -1,
       children: [],
-      manual: 'click',
       startTouch: null
     };
   },
   computed: {
+    names() {
+      return this.children.map(item => item.name);
+    },
     selectedIndex() {
       return this.names.indexOf(this.selected);
     },
-    names() {
-      return this.children.map(item => item.name);
+    lastIndex() {
+      return this.children.length - 1;
     }
   },
   mounted() {
@@ -66,11 +67,10 @@ export default {
     onClick(index) {
       if (this.selectedIndex === index) return;
       if (this.autoPlay) this.stop();
-      this.manual = 'click';
       this.manuallyUpdateSelected(index);
     },
     manuallyUpdateSelected(index) {
-      this.lastIndex = this.selectedIndex;
+      this.lastSelectedIndex = this.selectedIndex;
       const selected = this.names[index];
       this.$emit('update:selected', selected);
     },
@@ -94,55 +94,64 @@ export default {
       // console.log(Math.abs(y2-y1) * 2);
       const horizon = x1 - x2;
       if (horizon >= 0) {
-        const nextIndex =
-          this.selectedIndex + 1 === this.children.length
-            ? 0
-            : this.selectedIndex + 1;
+        const nextIndex = this.getNextIndex();
         this.manuallyUpdateSelected(nextIndex);
       } else {
-        this.manual = 'touch';
-        const prevIndex =
-          this.selectedIndex - 1 === -1
-            ? this.children.length - 1
-            : this.selectedIndex - 1;
+        const prevIndex = this.getPrevIndex();
         this.manuallyUpdateSelected(prevIndex);
       }
+    },
+    getNextIndex() {
+      return this.selectedIndex + 1 === this.children.length
+        ? 0
+        : this.selectedIndex + 1;
+    },
+    getPrevIndex() {
+      return this.selectedIndex - 1 === -1
+        ? this.lastIndex
+        : this.selectedIndex - 1;
     },
     autoUpdateSelected() {
       if (this.player) return;
       const run = () => {
         this.player = setTimeout(() => {
-          const nextIndex =
-            this.selectedIndex + 1 === this.children.length
-              ? 0
-              : this.selectedIndex + 1;
+          const nextIndex = this.getNextIndex();
           this.$emit('update:selected', this.children[nextIndex].name);
           run();
         }, 3000);
       };
       run();
     },
-    checkChangingDirection() {
-      if (this.manual === 'click') {
-        this.children[this.lastIndex].reverse =
-          this.selectedIndex < this.lastIndex;
-        this.children[this.selectedIndex].reverse =
-          this.selectedIndex < this.lastIndex;
-      } else if (this.manual === 'touch') {
-        this.children[this.lastIndex].reverse = true;
-        this.children[this.selectedIndex].reverse = true;
-      } else {
-        this.children[this.lastIndex].reverse = false;
-        this.children[this.selectedIndex].reverse = false;
-      }
-      this.manual = '';
+    fromFirstToEnd() {
+      return (
+        this.lastSelectedIndex === 0 && this.selectedIndex === this.lastIndex
+      );
+    },
+    fromBigToSmall() {
+      return this.lastSelectedIndex > this.selectedIndex;
+    },
+    fromEndToFirst() {
+      return (
+        this.lastSelectedIndex === this.lastIndex && this.selectedIndex === 0
+      );
+    },
+    checkTransitionsDirection() {
+      const condition =
+        this.fromFirstToEnd() ||
+        (this.fromBigToSmall() && !this.fromEndToFirst());
+      this.children[this.lastSelectedIndex].reverse = condition;
+      this.children[this.selectedIndex].reverse = condition;
+    },
+    transitions() {
+      if (this.lastSelectedIndex >= 0)
+        this.children[this.lastSelectedIndex].triggerItem();
+      this.children[this.selectedIndex].triggerItem();
+      this.lastSelectedIndex = this.selectedIndex;
     },
     autoChangeItem() {
-      if (this.lastIndex >= 0) this.checkChangingDirection();
+      if (this.lastSelectedIndex >= 0) this.checkTransitionsDirection();
       this.$nextTick(() => {
-        if (this.lastIndex >= 0) this.children[this.lastIndex].triggerItem();
-        this.children[this.selectedIndex].triggerItem();
-        this.lastIndex = this.selectedIndex;
+        this.transitions();
         if (this.autoPlay) this.autoUpdateSelected();
       });
     },
