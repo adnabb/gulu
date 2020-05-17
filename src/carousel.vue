@@ -9,7 +9,6 @@
       <slot></slot>
     </div>
     <div class="g-carousel-subscript">
-      <span>{{selectedIndex}}</span>
       <span
         v-for="n in children.length"
         :key="n-1"
@@ -81,6 +80,7 @@ export default {
       if (this.autoPlay) this.autoUpdateSelected();
     },
     onTouchstart(e) {
+      if (this.autoPlay) this.stop();
       const { touches } = e;
       this.startTouch = touches[0];
     },
