@@ -1,9 +1,18 @@
 <template>
-  <transition name="slide">
-    <div v-if="visible" :class="['g-carousel-item', {reverse}]">
-      <slot></slot>
-    </div>
-  </transition>
+  <div>
+    <template v-if="animationEnabled">
+      <transition name="slide">
+        <div v-if="visible" :class="['g-carousel-item', {reverse}]">
+          <slot></slot>
+        </div>
+      </transition>
+    </template>
+    <template v-else>
+      <div v-if="visible" :class="['g-carousel-item', {reverse}]">
+        <slot></slot>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -19,9 +28,14 @@ export default {
     return {
       visible: false,
       reverse: false,
+      animationEnabled: false
     };
   },
-  mounted() {},
+  updated() {
+    this.$nextTick(() => {
+      this.animationEnabled = true;
+    });
+  },
   methods: {
     triggerItem() {
       this.visible = !this.visible;

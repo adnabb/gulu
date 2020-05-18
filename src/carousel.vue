@@ -51,7 +51,6 @@ export default {
     }
   },
   mounted() {
-    // TODO:第一个默认不需要动画
     this.initSelected();
     if (this.autoPlay) this.autoUpdateSelected();
   },
@@ -85,6 +84,7 @@ export default {
       this.startTouch = touches[0];
     },
     onTouchend(e) {
+      // 用户操作优化（向上滚并是要往下查看）
       const { clientX: x1, clientY: y1 } = this.startTouch;
       const { changedTouches } = e;
       const endTouch = changedTouches[0];
