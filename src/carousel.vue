@@ -86,19 +86,19 @@ export default {
     onTouchend(e) {
       // 用户操作优化（向上滚并是要往下查看）
       const { clientX: x1, clientY: y1 } = this.startTouch;
-      const { changedTouches } = e;
-      const endTouch = changedTouches[0];
-      const { clientX: x2, clientY: y2 } = endTouch;
-      // const hypotenuse = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-      // console.log(hypotenuse);
-      // console.log(Math.abs(y2-y1) * 2);
+      const { clientX: x2, clientY: y2 } = e.changedTouches[0];
+      const hypotenuse = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      const deltaY = Math.abs(y2 - y1);
+      const sin = hypotenuse / deltaY;
       const horizon = x1 - x2;
-      if (horizon >= 0) {
-        const nextIndex = this.getNextIndex();
-        this.manuallyUpdateSelected(nextIndex);
-      } else {
-        const prevIndex = this.getPrevIndex();
-        this.manuallyUpdateSelected(prevIndex);
+      if (sin >= 2) {
+        if (horizon >= 0) {
+          const nextIndex = this.getNextIndex();
+          this.manuallyUpdateSelected(nextIndex);
+        } else {
+          const prevIndex = this.getPrevIndex();
+          this.manuallyUpdateSelected(prevIndex);
+        }
       }
     },
     getNextIndex() {
