@@ -33,7 +33,7 @@ export default {
     },
     delay: {
       type: Number,
-      default: 600
+      default: 3000
     }
   },
   data() {
