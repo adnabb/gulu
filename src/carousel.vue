@@ -11,6 +11,7 @@
     <div class="g-carousel-subscript">
       <span
         v-for="n in children.length"
+        :data-index="n-1"
         :key="n-1"
         :class="['g-carousel-subscript-item', { 'active': selectedIndex === n - 1}]"
         @click="onClick(n - 1)"
@@ -29,6 +30,10 @@ export default {
     autoPlay: {
       type: Boolean,
       default: true
+    },
+    delay: {
+      type: Number,
+      default: 600
     }
   },
   data() {
@@ -44,6 +49,7 @@ export default {
       return this.children.map(item => item.name);
     },
     selectedIndex() {
+      if (!this.selected) return 0;
       return this.names.indexOf(this.selected);
     },
     lastIndex() {
@@ -60,7 +66,9 @@ export default {
   methods: {
     initSelected() {
       this.children = this.$children;
-      if (!this.selected) this.$emit('update:selected', this.children[0].name);
+      if (!this.selected) {
+        this.$emit('update:selected', this.children[0].name);
+      }
     },
     onClick(index) {
       if (this.selectedIndex === index) return;
@@ -118,7 +126,7 @@ export default {
           const nextIndex = this.getNextIndex();
           this.$emit('update:selected', this.children[nextIndex].name);
           run();
-        }, 3000);
+        }, this.delay);
       };
       run();
     },

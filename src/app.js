@@ -464,6 +464,7 @@ new Vue({
       cascaderSource3: [],
       carouselSelected: '',
       carouselSelected2: '',
+      carouselSelected3: '2',
     };
   },
   methods: {

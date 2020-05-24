@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="g-carousel-item--wrapper">
     <template v-if="animationEnabled">
       <transition name="slide">
         <div v-if="visible" :class="['g-carousel-item', {reverse}]">
