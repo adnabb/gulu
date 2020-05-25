@@ -123,7 +123,45 @@
 
 <body>
     <div id="app">
-        
+
+        导航菜单 - 横向
+        <div style="margin: 20px 0;">
+            <g-menu :selected.sync="menu">
+                <g-menu-item name="1">menu 1</g-menu-item>
+                <g-submenu name="2">
+                    <template slot="name">
+                        menu 2
+                    </template>
+                    <g-menu-item name="2-1">menu 2-1</g-menu-item>
+                    <g-menu-item name="2-2">menu 2-2</g-menu-item>
+                    <g-menu-item name="2-3">menu 2-3</g-menu-item>
+                    <g-menu-item name="2-4">menu 2-4</g-menu-item>
+                </g-submenu>
+                <g-submenu name="3">
+                    <template slot="name">
+                        menu 3
+                    </template>
+                    <g-menu-item name="3-1">menu 3-1</g-menu-item>
+                    <g-menu-item name="3-2">menu 3-2</g-menu-item>
+                    <g-menu-item name="3-3">menu 3-3</g-menu-item>
+                    <g-submenu name="3-4">
+                        <template slot="name">menu 3-4</template>
+                        <g-menu-item name="3-4-1">menu 3-4-1</g-menu-item>
+                        <g-menu-item name="3-4-2">menu 3-4-2</g-menu-item>
+                        <g-menu-item name="3-4-3">menu 3-4-3</g-menu-item>
+                        <g-submenu name="3-4-4">
+                            <template slot="name">
+                                menu 3-4-4
+                            </template>
+                            <g-menu-item name="3-4-4-1">menu 3-4-4-1</g-menu-item>
+                            <g-menu-item name="3-4-4-2">menu 3-4-4-2</g-menu-item>
+                            <g-menu-item name="3-4-4-3">menu 3-4-4-3</g-menu-item>
+                        </g-submenu>
+                    </g-submenu>
+                </g-submenu>
+                <g-menu-item name="4">menu 4</g-menu-item>
+            </g-menu>
+        </div>
         无缝轮播组件 - 自动播放
         <div style="margin: 20px 0;">
             <g-carousel :selected.sync="carouselSelected2">
@@ -155,7 +193,8 @@
         </div> -->
         级联选择器 - 动态加载省市县选择器
         <div style="margin: 20px 0;">
-            <g-cascader :source.sync="cascaderSource3" :load-data="loadData" :selected.sync="cascaderSelected4"></g-cascader>
+            <g-cascader :source.sync="cascaderSource3" :load-data="loadData" :selected.sync="cascaderSelected4">
+            </g-cascader>
         </div>
         级联选择器 - 选项可禁用
         <div style="margin: 20px 0;">

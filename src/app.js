@@ -24,6 +24,10 @@ import { city } from './static/regions/city';
 import { town } from './static/regions/town';
 import Carousel from './carousel';
 import CarouselItem from './carousel-item';
+import Menu from './menu/index';
+import MenuItem from './menu/menu-item';
+import MenuItemGroup from './menu/menu-item-group';
+import Submenu from './menu/submenu';
 
 Vue.use(MyPlugin);
 
@@ -51,6 +55,10 @@ new Vue({
     'g-cascader': Cascader,
     'g-carousel': Carousel,
     'g-carousel-item': CarouselItem,
+    'g-menu': Menu,
+    'g-menu-item': MenuItem,
+    'g-menu-item-group': MenuItemGroup,
+    'g-submenu': Submenu,
   },
   data() {
     return {
@@ -465,6 +473,7 @@ new Vue({
       carouselSelected: '',
       carouselSelected2: '',
       carouselSelected3: '2',
+      menu: '1'
     };
   },
   methods: {
