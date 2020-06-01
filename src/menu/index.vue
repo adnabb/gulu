@@ -21,45 +21,50 @@ export default {
     };
   },
   mounted() {
-    this.updateChildren();
+    this.updateChildren && this.updateChildren();
   },
   methods: {
     updateSelected(name) {
       this.$emit('update:selected', name);
-    },
+    }
   },
   watch: {
     selected(newValue, oldValue) {
-      this.updateChildren();
+      this.updateChildren && this.updateChildren();
     }
   }
 };
 </script>
 
 <style lang="scss">
+@import '../styles/variables.scss';
+$active-height: 2px;
 .g-menu {
   display: flex;
+  border-bottom: 1px solid $border-color;
+  padding: 0 4em;
   &-item, .g-submenu-title {
     padding: 1em 2em;
-    border: 1px solid;
     background: #fff;
     cursor: pointer;
+    color: $gray;
+    position: relative;
+    user-select: none;
     &.active {
-      outline:#00FF00 dotted thick;
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: $active-height;
+        background: $border-active-color;
+        top: calc(100% - #{$active-height});
+        left: 0;
+      }
+      color: $font-color;
+    }
+    &:hover {
+      color: $font-color;
     }
   }
 }
-  .g-submenu {
-    position: relative;
-    &-container {
-      position: absolute;
-      white-space: nowrap;
-      z-index: 1;
-        .g-submenu-container {
-          top: 0;
-          left: 100%;
-        }
-    }
-  }
-
 </style>
