@@ -21,10 +21,10 @@ export default {
   },
   methods: {
     onClick(e) {
-      const { updateSelected, triggerSubmenu } = this.$parent;
+      const { updateSelected, triggerSubmenuMiddleware } = this.$parent;
       const name = typeof this.name === 'string' ? [this.name] : this.name;
       updateSelected(name);
-      triggerSubmenu && triggerSubmenu();
+      triggerSubmenuMiddleware && triggerSubmenuMiddleware();
     }
   }
 };

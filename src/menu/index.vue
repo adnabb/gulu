@@ -1,5 +1,5 @@
 <template>
-  <div class="g-menu">
+  <div class="g-menu" :class="{vertical}">
     <slot></slot>
   </div>
 </template>
@@ -20,25 +20,17 @@ export default {
       root: this
     };
   },
-  mounted() {
-    this.updateChildren && this.updateChildren();
-  },
   methods: {
     updateSelected(name) {
       this.$emit('update:selected', name);
     }
   },
-  watch: {
-    selected(newValue, oldValue) {
-      this.updateChildren && this.updateChildren();
-    }
-  }
 };
 </script>
 
 <style lang="scss">
 @import '../styles/variables.scss';
-$active-height: 2px;
+$active-length: 2px;
 .g-menu {
   display: flex;
   border-bottom: 1px solid $border-color;
@@ -55,15 +47,45 @@ $active-height: 2px;
         content: '';
         position: absolute;
         width: 100%;
-        height: $active-height;
+        height: $active-length;
         background: $border-active-color;
-        top: calc(100% - #{$active-height});
+        top: calc(100% - #{$active-length});
         left: 0;
       }
       color: $font-color;
     }
     &:hover {
       color: $font-color;
+    }
+  }
+  &.vertical {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid $border-color;
+    width: 200px;
+    padding: 0;
+    .g-submenu-icon-container {
+      right: 2em;
+      position: absolute;
+    }
+    .g-submenu-title.active, .g-submenu .g-submenu-title.active {
+      color: $font-active-color;
+      &:after  {
+        content: unset;
+      }
+    }
+    .g-menu-item, .g-submenu .g-menu-item {
+      &.active {
+        color: $font-active-color;
+        background: $menu-active-bg;
+        &:after {
+          content: '';
+          height: 100%;
+          width: $active-length;
+          top: 0;
+          left: calc(100% - #{$active-length});
+        }
+      }
     }
   }
 }

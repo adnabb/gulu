@@ -6,7 +6,7 @@
         <g-icon class="dropdown-icon" icon="arrow-down"></g-icon>
       </span>
     </div>
-    <div class="g-submenu-list-container" v-if="visible">
+    <div class="g-submenu-list-container" :style="indentStyle" :class="{vertical}" v-if="visible">
       <slot></slot>
     </div>
   </div>
@@ -30,6 +30,21 @@ export default {
   computed: {
     active() {
       return this.root.selected.indexOf(this.name) >= 0;
+    },
+    vertical() {
+      return this.root.vertical;
+    },
+    indentStyle() {
+      if (!this.vertical) return;
+      let parent = this.$parent;
+      let parentName = parent.$options.name;
+      let indent = 1;
+      while (parentName !== 'GuluMenu') {
+        indent += 1;
+        parent = parent.$parent;
+        parentName = parent.$options.name;
+      }
+      return `text-indent: ${indent}em`;
     }
   },
   data() {
@@ -45,7 +60,12 @@ export default {
     triggerSubmenu() {
       this.visible = !this.visible;
     },
+    triggerSubmenuMiddleware() {
+      if (this.vertical) return;
+      this.triggerSubmenu();
+    },
     hide() {
+      if (this.vertical) return;
       this.visible = false;
     },
     updateSelected(name) {
@@ -59,7 +79,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/variables';
 .g-submenu {
   position: relative;
@@ -83,6 +103,7 @@ export default {
     white-space: nowrap;
     z-index: 1;
   }
+  // submenu list 下面的菜单被选中不允许展示下划线
   .g-menu-item.active, .g-submenu .g-submenu-title.active {
     color: $font-color;
     &:after {
@@ -105,6 +126,13 @@ export default {
       top: 0;
       left: 100%;
     }
+  }
+  .g-submenu-list-container.vertical {
+    position: relative;
+    box-shadow: none;
+    margin: 0;
+    left: unset;
+    top: unset;
   }
 }
 </style>
