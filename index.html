@@ -126,7 +126,7 @@
 
         导航菜单 - 竖向
         <div style="margin: 20px 0;">
-            <g-menu :selected.sync="menu2" vertical>
+            <g-menu :selected.sync="menu3" vertical>
                 <g-menu-item name="1">menu 1</g-menu-item>
                 <g-submenu name="2">
                     <template slot="name">
@@ -162,9 +162,9 @@
                 <g-menu-item name="4">menu 4</g-menu-item>
             </g-menu>
         </div>
-        导航菜单 - 横向
+        导航菜单 - 横向（有子菜单）
         <div style="margin: 20px 0;">
-            <g-menu :selected.sync="menu">
+            <g-menu :selected.sync="menu2">
                 <g-menu-item name="1">menu 1</g-menu-item>
                 <g-submenu name="2">
                     <template slot="name">
@@ -197,6 +197,15 @@
                         </g-submenu>
                     </g-submenu>
                 </g-submenu>
+                <g-menu-item name="4">menu 4</g-menu-item>
+            </g-menu>
+        </div>
+        导航菜单 - 横向（默认选中第一个菜单）
+        <div style="margin: 20px 0;">
+            <g-menu :selected.sync="menu">
+                <g-menu-item name="1">menu 1</g-menu-item>
+                <g-menu-item name="2">menu 2</g-menu-item>
+                <g-menu-item name="3">menu 3</g-menu-item>
                 <g-menu-item name="4">menu 4</g-menu-item>
             </g-menu>
         </div>

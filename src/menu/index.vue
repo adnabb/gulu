@@ -20,7 +20,17 @@ export default {
       root: this
     };
   },
+  mounted() {
+    if (!this.selected) this.initSelect()
+  },
   methods: {
+    initSelect() {
+      if (!this.$children.length) {
+        console.warn('请添加菜单选项');
+        return;
+      }
+      this.updateSelected(this.$children[0].name);
+    },
     updateSelected(name) {
       this.$emit('update:selected', name);
     }

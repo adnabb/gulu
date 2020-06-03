@@ -473,8 +473,9 @@ new Vue({
       carouselSelected: '',
       carouselSelected2: '',
       carouselSelected3: '2',
-      menu: '1',
-      menu2: '1'
+      menu: '',
+      menu2: '1',
+      menu3: '1'
     };
   },
   methods: {
