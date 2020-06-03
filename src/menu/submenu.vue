@@ -1,14 +1,16 @@
 <template>
   <div class="g-submenu" v-click-outside="hide">
-    <div class="g-submenu-title" :class="[{active}, {visible}]" @click="triggerSubmenu">
+    <div class="g-submenu-title" :class="[{active}, {visible}, {default: !vertical}, {vertical}]" @click="triggerSubmenu">
       <slot name="name"></slot>
       <span class="g-submenu-icon-container">
         <g-icon class="dropdown-icon" icon="arrow-down"></g-icon>
       </span>
     </div>
-    <div class="g-submenu-list-container" :style="indentStyle" :class="{vertical}" v-if="visible">
-      <slot></slot>
-    </div>
+    <transition :name="transitionName">
+      <div class="g-submenu-list-container" :style="indentStyle" :class="{vertical}" v-if="visible">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -33,6 +35,10 @@ export default {
     },
     vertical() {
       return this.root.vertical;
+    },
+    transitionName() {
+      if (this.vertical) return 'slide-bottom-fade';
+      return 'slide-top-fade';
     },
     indentStyle() {
       if (!this.vertical) return;
@@ -83,6 +89,26 @@ export default {
 @import '../styles/variables';
 .g-submenu {
   position: relative;
+  .slide-bottom-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-bottom-fade-leave-active {
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-bottom-fade-enter, .slide-bottom-fade-leave-to {
+    opacity: .5;
+    transform: translateX(-4px);
+  }
+  .slide-top-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-top-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-top-fade-enter, .slide-top-fade-leave-to {
+    transform: translateY(10px);
+    opacity: 0;
+  }
   &-title.visible {
     .dropdown-icon {
       transform: rotate(-180deg);
@@ -111,11 +137,11 @@ export default {
     }
   }
   .g-submenu {
-    .dropdown-icon {
+    &.default .dropdown-icon {
       transform: rotate(-90deg);
       vertical-align: -2px;
     }
-    .g-submenu-title.visible {
+    &.default .g-submenu-title.visible {
       .dropdown-icon {
         transform: rotate(-270deg);
       }
