@@ -2,13 +2,13 @@
   <div class="container">
     <input
       :class="{ error }"
-      type="text"
+      :type="type"
       :value="value"
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
       :error="error"
-      @change="$emit('change', $event.target.value)"
+      @change="onChange"
       @input="$emit('input', $event.target.value)"
       @blur="$emit('blur', $event.target.value)"
       @focus="$emit('focus', $event.target.value)"
@@ -43,22 +43,26 @@ export default {
     },
     error: {
       type: String
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   },
   components: {
     'g-icon': Icon,
-  }
+  },
+  methods: {
+    onChange(e) {
+      this.$emit('update:value', e.target.value);
+      this.$emit('change', e.target.value);
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import 'styles/variables.scss';
-
-$input-focus-color: #409eff;
-$input-hover-color: #c0c4cc;
-$input-font-color: #606266;
-
-$input-disabled-bg: #f5f7fa;
 
 .container {
   display: inline-block;
@@ -94,7 +98,7 @@ $input-disabled-bg: #f5f7fa;
     border-color: $red;
 
     &:focus, &:hover {
-      border-color: red;
+      border-color: $red;
     }
   }
 

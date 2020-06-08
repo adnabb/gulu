@@ -28,6 +28,9 @@ import Menu from './menu/index';
 import MenuItem from './menu/menu-item';
 import MenuItemGroup from './menu/menu-item-group';
 import Submenu from './menu/submenu';
+import Form from './form/index';
+import FormItem from './form/form-item';
+import FormMixin from './form.mixin';
 
 Vue.use(MyPlugin);
 
@@ -59,7 +62,10 @@ new Vue({
     'g-menu-item': MenuItem,
     'g-menu-item-group': MenuItemGroup,
     'g-submenu': Submenu,
+    'g-form': Form,
+    'g-form-item': FormItem,
   },
+  mixins: [FormMixin],
   data() {
     return {
       loading1: false,
@@ -475,7 +481,16 @@ new Vue({
       carouselSelected3: '2',
       menu: '',
       menu2: '1',
-      menu3: '1'
+      menu3: '1',
+      form: {
+        username: '',
+        password: '',
+      },
+      username: '',
+      rules: {
+        username: [{ required: true }],
+        password: [{ required: true }],
+      },
     };
   },
   methods: {
@@ -563,5 +578,13 @@ new Vue({
         autoClose: false,
       });
     },
+    onSubmit() {
+      this.validate(this.form, this.rules);
+    },
+    onReset() {
+      this.error = '';
+      this.form.username = '';
+      this.form.password = '';
+    }
   },
 });

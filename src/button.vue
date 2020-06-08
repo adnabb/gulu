@@ -1,5 +1,5 @@
 <template>
-  <button class="g-button" @click="$emit('click')">
+  <button class="g-button" :type="type" @click="$emit('click')">
     <g-icon v-if="loading" icon="loading" class="g-loading" :class="`icon-position-${iconPosition}`"></g-icon>
     <g-icon v-if="icon && !loading" :icon="icon" :class="`icon-position-${iconPosition}`"></g-icon>
     <span class="button-text">
@@ -26,6 +26,10 @@ export default {
     loading: {
       default: false,
       type: Boolean,
+    },
+    type: {
+      type: String,
+      default: 'button'
     }
   },
   components: {

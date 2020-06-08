@@ -89,21 +89,9 @@ export default {
 @import '../styles/variables';
 .g-submenu {
   position: relative;
-  .slide-bottom-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-bottom-fade-leave-active {
-    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
   .slide-bottom-fade-enter, .slide-bottom-fade-leave-to {
     opacity: .5;
     transform: translateX(-4px);
-  }
-  .slide-top-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-top-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
   .slide-top-fade-enter, .slide-top-fade-leave-to {
     transform: translateY(10px);

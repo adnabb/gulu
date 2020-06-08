@@ -11,6 +11,12 @@ $font-disabled-color: #c0c4cc;
 
 $common-height: 32px;
 
+$input-focus-color: $font-hover-color;
+$input-hover-color: $font-disabled-color;
+$input-font-color: #606266;
+
+$input-disabled-bg: #f5f7fa;
+
 $placeholder-color: #c0c4cc;
 
 $button-bg: #fff;
@@ -28,8 +34,12 @@ $collapse-item-hover-bg: #f5f5f5;
 
 $menu-active-bg: #e6f7ff;
 
-$red: #f56c6c;
+$red: #ff4d4f;
 $gray: #909399;
+
+.red {
+  color: $red;
+}
 
 %box-shadow {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -42,3 +52,24 @@ $gray: #909399;
 }
 
 .g-loading { animation: spin .5s infinite linear; }
+
+.slide-bottom-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-bottom-fade-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-bottom-fade-enter, .slide-bottom-fade-leave-to {
+  opacity: .5;
+  transform: translateX(-4px);
+}
+.slide-top-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-top-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-top-fade-enter, .slide-top-fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
