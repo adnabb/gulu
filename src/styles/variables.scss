@@ -45,6 +45,16 @@ $gray: #909399;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.no-border.no-border {
+  border: 0;
+}
+.cursor-default {
+  cursor: default;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @keyframes spin {
   0% { transform: rotate(0); }
 

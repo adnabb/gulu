@@ -31,6 +31,7 @@ import Submenu from './menu/submenu';
 import Form from './form/index';
 import FormItem from './form/form-item';
 import FormMixin from './form.mixin';
+import Pagination from './pagination';
 
 Vue.use(MyPlugin);
 
@@ -64,6 +65,7 @@ new Vue({
     'g-submenu': Submenu,
     'g-form': Form,
     'g-form-item': FormItem,
+    'g-pagination': Pagination,
   },
   mixins: [FormMixin],
   data() {
