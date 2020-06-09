@@ -6,7 +6,7 @@
     </li>
     <template v-for="(i, index) in shownPage">
       <li v-if="i === '...'" class="g-pagination-item no-border cursor-default dots" :key="index">
-        <g-icon  icon="dots"></g-icon>
+        <g-icon icon="dots"></g-icon>
       </li>
       <li v-else class="g-pagination-item" :class="{active: i === current}" :key="index">
         <a href="#" @click="onChange(i)">
@@ -39,17 +39,19 @@ export default {
       default: () => [10, 20, 50, 100]
     },
     sizeVsisble: {
-      type: Boolean,
+      type: Boolean
     }
   },
   computed: {
     shownPage() {
       const list = this.getBasicPageList();
       const uniqueList = [...new Set(list)];
-      if (uniqueList[1] - uniqueList[0] > 1) uniqueList.splice(1, 0, '...');
-      const { length } = uniqueList;
-      if (uniqueList[length - 1] - uniqueList[length - 2] > 1) uniqueList.splice(length - 1, 0, '...');
-      return uniqueList;
+      return uniqueList.reduce((prev, current, index) => {
+        const length = prev.length;
+        if (length >= 1 && current - prev[length - 1] > 1) prev.push('...');
+        prev.push(current);
+        return prev;
+      }, []);
     },
     totalPage() {
       return Math.ceil(this.total / this.size);
