@@ -1,6 +1,6 @@
 <template>
   <ul class="g-pagination">
-    <p v-if="totalVisible" style="margin-right:.5em">共{{total}}条</p>
+    <p class="g-pagination-total" v-if="totalVisible" style="margin-right:.5em">共{{total}}条</p>
     <li class="g-pagination-item previous" v-if="current > 1" @click="onPrevious">
       <g-icon icon="arrow-left"></g-icon>
     </li>
@@ -8,8 +8,8 @@
       <li v-if="i === '...'" class="g-pagination-item no-border cursor-default dots" :key="index">
         <g-icon icon="dots"></g-icon>
       </li>
-      <li v-else class="g-pagination-item" :class="{active: i === current}" :key="index">
-        <a href="#" @click="onChange(i)">
+      <li v-else class="g-pagination-item" @click="onChange(i)" :data-index="i" :class="{active: i === current}" :key="index">
+        <a href="#">
           <span>{{ i }}</span>
         </a>
       </li>
@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     shownPage() {
+      if (!this.total) return [];
       const list = this.getBasicPageList();
       const uniqueList = [...new Set(list)];
       return uniqueList.reduce((prev, current, index) => {
