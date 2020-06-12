@@ -229,6 +229,7 @@ export default {
     }
     &-container {
       overflow-y: auto;
+      overflow-x: hidden;
       min-width: 100px;
       // 设置后长度不会换行
       width: max-content;

@@ -24,13 +24,18 @@ module.exports = {
         children: [
           ['/components/layout', 'layout 布局'],
           ['/components/grid', 'grid 栅格'],
-          ['/components/icon', 'icon 按钮'],
+          ['/components/icon', 'icon 图标'],
           ['/components/button', 'button 按钮'],
           ['/components/input', 'input 输入框'],
-          ['/components/popover', 'popover 弹出框'],
+          ['/components/popover', 'popover 气泡卡片'],
           ['/components/tab', 'tab 标签页'],
           ['/components/toast', 'toast 弹出层'],
           ['/components/collapse', 'collapse 折叠面板'],
+          ['/components/menu', 'menu 菜单'],
+          ['/components/form', 'form 表单'],
+          ['/components/carousel', 'carousel 无缝轮播组件'],
+          ['/components/cascader', 'cascader 级联选择器'],
+          ['/components/pagination', 'pagination 分页'],
         ]
       }
     ]
