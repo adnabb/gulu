@@ -1,19 +1,23 @@
-## 基础用法
-
-<ClientOnly>
-  <g-toast-1></g-toast-1>
-</ClientOnly>
-
-```vue
-<g-button @click="showToast">点击弹出toast</g-button>
-<g-button @click="changeToastPosition">toast出现在下方</g-button>
-<g-button @click="customCloseToast">自定义关闭toast</g-button>
-<g-button @click="autoCloseToast">自动关闭Toast</g-button>
-<g-button @click="htmlSuportedToast">htmlSuportedToast</g-button>
-<g-button @click="multiLineToast">toast多行文字</g-button>
+<template>
+  <div style="margin: 20px 0;">
+    <g-button @click="showToast">点击弹出toast</g-button>
+    <g-button @click="changeToastPosition">toast出现在下方</g-button>
+    <g-button @click="customCloseToast">自定义关闭toast</g-button>
+    <g-button @click="autoCloseToast">自动关闭Toast</g-button>
+    <g-button @click="htmlSuportedToast">htmlSuportedToast</g-button>
+    <g-button @click="multiLineToast">toast多行文字</g-button>
+  </div>
+</template>
 
 <script>
+import Button from '../../../src/button-group';
+import Toast from '../../../src/toast';
+import MyPlugin from '../../../src/my-plugins';
 export default {
+  components: {
+  'g-button': Button,
+  'g-toast': Toast,
+  },
   methods: {
     showToast() {
       this.$toast('你好，这是一条toast内容', {
@@ -61,4 +65,6 @@ export default {
   }
 };
 </script>
-```        
+
+<style scoped>
+</style>
