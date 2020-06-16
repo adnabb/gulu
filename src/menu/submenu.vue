@@ -1,6 +1,10 @@
 <template>
   <div class="g-submenu" v-click-outside="hide">
-    <div class="g-submenu-title" :class="[{active}, {visible}, {default: !vertical}, {vertical}]" @click="triggerSubmenu">
+    <div
+      class="g-submenu-title"
+      :class="[{active}, {visible}, {default: !vertical}, {vertical}]"
+      @click="triggerSubmenu"
+    >
       <slot name="name"></slot>
       <span class="g-submenu-icon-container">
         <g-icon class="dropdown-icon" icon="arrow-down"></g-icon>
@@ -64,7 +68,13 @@ export default {
   },
   methods: {
     triggerSubmenu() {
-      this.visible = !this.visible;
+      const { $parent } = this;
+      if (this.visible) {
+        this.visible = false;
+        if ($parent.$options.name !== 'GuluMenu') $parent.triggerSubmenu();
+      } else {
+        this.visible = true;
+      }
     },
     triggerSubmenuMiddleware() {
       if (this.vertical) return;
