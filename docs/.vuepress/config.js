@@ -5,7 +5,7 @@ module.exports = {
     lastUpdated: '上次更新', // string | boolean,
     nav: [
       { text: '主页', link: '/' },
-      { text: '开发指南', link: '/guide/' },
+      { text: '开发指南', link: '/guide/installation' },
     ],
     sidebar: [
       {
