@@ -14,7 +14,7 @@
       @focus="$emit('focus', $event.target.value)"
     />
     <template v-if="error">
-      <g-icon class="error-tips" icon="info"></g-icon>
+      <g-icon class="error-tips" name="#g-info"></g-icon>
       <span class="error-tips">{{ error }}</span>
     </template>
   </div>

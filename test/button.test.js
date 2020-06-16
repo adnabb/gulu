@@ -28,7 +28,7 @@ describe('Button', () => {
 
     it('可以设置Icon', () => {
       const vm = getRenderedVM(Button, {
-        icon: 'download'
+        icon: '#g-download'
       });
 
       const use = vm.$el.querySelector('use');
@@ -41,7 +41,7 @@ describe('Button', () => {
 
     it('可以设置loading', () => {
       const vm = getRenderedVM(Button, {
-        icon: 'download',
+        icon: '#g-download',
         loading: true
       });
 
@@ -57,7 +57,7 @@ describe('Button', () => {
       const div = appendTestDom();
 
       const vm = getRenderedVM(Button, {
-        icon: 'download',
+        icon: '#g-download',
         iconPosition: 'left'
       }, div);
 
@@ -73,7 +73,7 @@ describe('Button', () => {
       const div = appendTestDom();
 
       const vm = getRenderedVM(Button, {
-        icon: 'download',
+        icon: '#g-download',
         iconPosition: 'right'
       }, div);
 
@@ -91,7 +91,7 @@ describe('Button', () => {
       const div = appendTestDom();
 
       const vm = getRenderedVM(Button, {
-        icon: 'download',
+        icon: '#g-download',
       }, div);
 
       const callback = sinon.fake();

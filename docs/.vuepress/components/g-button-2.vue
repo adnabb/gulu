@@ -1,9 +1,9 @@
 <template>
   <div style="margin: 20px">
     <g-button-group>
-      <g-button icon="arrow-left">上一页</g-button>
+      <g-button icon="#g-arrow-left">上一页</g-button>
       <g-button>更多</g-button>
-      <g-button icon="arrow-right" icon-position="right">下一页</g-button>
+      <g-button icon="#g-arrow-right" icon-position="right">下一页</g-button>
     </g-button-group>
   </div>
 </template>

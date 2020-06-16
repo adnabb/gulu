@@ -1,6 +1,6 @@
 <template>
   <svg class="g-icon" aria-hidden="true">
-    <use :xlink:href="`#g-${icon}`" />
+    <use :xlink:href="name" />
   </svg>
 </template>
 
@@ -9,7 +9,7 @@ import './static/icon'
 
 export default {
   props: {
-    icon: {
+    name: {
       type: String
     }
   }

@@ -3,13 +3,13 @@
     <g-tabs default-active-id="1">
       <g-tab-pane tab="tab1" id="1">
         <span slot="tab">
-          <g-icon icon="download"></g-icon>下载
+          <g-icon name="#g-download"></g-icon>下载
         </span>
         下载pane
       </g-tab-pane>
       <g-tab-pane tab="tab2" id="2">
         <span slot="tab">
-          <g-icon icon="upload"></g-icon>上传
+          <g-icon name="#g-upload"></g-icon>上传
         </span>
         上传pane
       </g-tab-pane>

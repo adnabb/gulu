@@ -1,7 +1,7 @@
 <template>
   <div :class="['g-cascader-list', {'loading': propLoading}]">
     <template v-if="propLoading">
-      <g-icon icon="loading" class="g-loading"></g-icon>
+      <g-icon name="#g-loading" class="g-loading"></g-icon>
     </template>
     <template v-else>
       <div class="g-cascader-item-container">
@@ -17,14 +17,14 @@
             <g-icon
               :class="getIconClasses(item.value)"
               v-if="!item.isLeaf"
-              :icon="getIconStyle(item.value)"
+              :name="getIconStyle(item.value)"
             ></g-icon>
           </template>
           <template v-else>
             <g-icon
               class="g-cascader-item-right-arrow"
               v-if="item.children && item.children.length > 0"
-              icon="arrow-right"
+              name="#g-arrow-right"
             ></g-icon>
           </template>
         </div>
@@ -97,11 +97,11 @@ export default {
         this.selected[this.level] &&
         this.selected[this.level].value &&
         this.selected[this.level].value === value
-        ? 'loading'
-        : 'arrow-right';
+        ? '#g-loading'
+        : '#g-arrow-right';
     },
     getIconClasses(value) {
-      return ['g-cascader-item-right-arrow', `g-${this.getIconStyle(value)}`];
+      return ['g-cascader-item-right-arrow', `${this.getIconStyle(value).slice(1)}`];
     },
     showChildren(item) {
       // children是根据this.selected[this.level]是否有children进行加载的

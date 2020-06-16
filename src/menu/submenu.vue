@@ -7,7 +7,7 @@
     >
       <slot name="name"></slot>
       <span class="g-submenu-icon-container">
-        <g-icon class="dropdown-icon" icon="arrow-down"></g-icon>
+        <g-icon class="dropdown-icon" name="#g-arrow-down"></g-icon>
       </span>
     </div>
     <transition :name="transitionName">
