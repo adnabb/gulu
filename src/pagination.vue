@@ -125,9 +125,9 @@ $pagination-width: 30px;
     &.previous, &.next {
       cursor: pointer;
     }
-    .g-icon {
-      vertical-align: -5px;
-    }
+    // .g-icon {
+    //   vertical-align: -5px;
+    // }
     &:first-child {
       margin-left: 0;
     }
