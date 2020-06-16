@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 20px">
+  <div style="margin: 20px 0">
     <g-button-group>
       <g-button icon="#g-arrow-left">上一页</g-button>
       <g-button>更多</g-button>
