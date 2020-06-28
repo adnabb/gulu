@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Vue UI Framework',
   description: '一个基于Vue的组件库',
+  base: '/gulu/',
   themeConfig: {
     lastUpdated: '上次更新', // string | boolean,
     nav: [
