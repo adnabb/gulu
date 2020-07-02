@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Vue UI Framework',
+  title: 'Simple UI',
   description: '一个基于Vue的组件库',
   base: '/gulu/',
   themeConfig: {
